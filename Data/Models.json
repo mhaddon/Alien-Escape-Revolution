@@ -1,0 +1,117 @@
+/**
+ * This file is JS file rather than a JSON one because javascript does not 
+ * have the permission to access local files normally, but we can work around
+ * that by making this file actually parse the JSON rather than a different file
+ */
+ 
+ /**
+  * Backtick is some sort of ECMAScript 6 voodoo shit to allow multilined strings
+  */
+var ModelJSON = `
+[
+    [
+        [null,    null,    "white", null,    null,    null,    null,    "white", null,    null],
+        [null,    null,    null,    "white", "white", "white", "white", null,    null,    null],
+        [null,    null,    "white", "white", "white", "white", "white", "white", null,    null],
+        ["white", null,    "white", null,    "white", "white", null,    "white", null,    "white"],
+        [null,    "white", "white", "white", "white", "white", "white", "white", "white", null],
+        [null,    null,    "white", null,    null,    null,    null,    "white", null,    null],
+        [null,    null,    null,    "white", "white", "white", "white", null,    null,    null],
+        [null,    null,    null,    "white", null,    null,    "white", null,    null,    null]
+    ],
+    [
+        [null,    null,    "white", null,    null,    null,    null,    "white", null,    null],
+        [null,    null,    null,    "white", "white", "white", "white", null,    null,    null],
+        [null,    null,    "white", "white", "white", "white", "white", "white", null,    null],
+        [null,    null,    "white", null,    "white", "white", null,    "white", null,    null],
+        [null,    "white", "white", "white", "white", "white", "white", "white", "white", null],
+        ["white", null,    "white", "white", null,    null,    "white", "white", null,    "white"],
+        [null,    null,    null,    "white", "white", "white", "white", null,    null,    null],
+        [null,    null,    "white",    null, null,    null,    null,    "white", null,    null]
+    ],
+    [
+        ["white", null,    null,    null],
+        ["white", "white", null,    null],
+        ["white",    "yellow", "white", "white"],
+        ["white",  "white",  "white", null]
+    ],
+    [
+        ["white", null,    null,    null],
+        ["white", "white", null,    null],
+        ["white",    "pink", "white", "white"],
+        ["white",  "white",  "white", null]
+    ],
+    [
+        ["white", null,    null,    null],
+        ["white", "white", null,    null],
+        ["white",    "red",   "white", "white"],
+        ["white",  "white",  "white", null]
+    ],
+    [
+        ["white", null,    null,    null],
+        ["white", "white", null,    null],
+        ["white",    "orange","white", "white"],
+        ["white",  "white",  "white", null]
+    ],
+    [
+        [null,    null,    "grey", null,    null,    "grey",    "grey",    "grey", "grey",    null],
+        [null,    "grey",    "grey",    "grey", "grey", "grey", "grey", "grey",    "grey",    null],
+        [null,    "grey",    "grey", "grey", "grey", "grey", "grey", "grey", "grey",    "grey"],
+        [null,    "grey",    "grey", null,    "grey", "grey", "grey",    "grey", "grey",    null],
+        [null,    "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey"],
+        ["grey", "grey",    "grey", "grey", "grey",    "grey",    "grey", "grey", "grey",    null],
+        [null,    null,    "grey",    "grey", "grey", "grey", "grey", "grey",    null,    null],
+        [null,    "grey",    "grey",    null, "grey",    "grey",    "grey",    "grey", null,    null]
+    ],
+    [
+        ["white", "yellow"]
+    ],
+    [
+        ["yellow", "white"]
+    ],
+    [
+        [null,    null,    null,    null,    null],
+        [null,    null,    "yellow",    null,    null],
+        [null,    "yellow",    "orange",    "yellow",    null],
+        [null,    null,    "yellow",    null,    null],
+        [null,    null,    null,    null,    null]
+    ],
+    [
+        [null,    null,    "yellow",    null,    null],
+        [null,    null,    "orange",    null,    null],
+        ["yellow",    "orange",    "red",    "orange",    "yellow"],
+        [null,    null,    "orange",    null,    null],
+        [null,    null,    "yellow",    null,    null]
+    ],
+    [
+        [null,    null,    "orange",    null,    null],
+        [null,    "yellow",    "red",    "yellow",    null],
+        ["orange",    "red",    "black",    "red",    "orange"],
+        [null,    "yellow",    "red",    "yellow",    null],
+        [null,    null,    "orange",    null,    null]
+    ],
+    [
+        [null,    null,    "red",    null,    null],
+        [null,    "orange",    "black",    "orange",    null],
+        ["red",    "black",    null,    "black",    "red"],
+        [null,    "orange",    "black",    "orange",    null],
+        [null,    null,    "red",    null,    null]
+    ],
+    [
+        [null,    null,    "yellow",    null,    null],
+        [null,    "yellow",    null,    "yellow",    null],
+        ["yellow",    null,    null,    null,    "yellow"],
+        [null,    "yellow",    null,    "yellow",    null],
+        [null,    null,    "yellow",    null,    null]
+    ],
+    [
+        [null,    null,    "white",    null,    null],
+        [null,    "white",    null,    "white",    null],
+        ["white",    null,    null,    null,    "white"],
+        [null,    "white",    null,    "white",    null],
+        [null,    null,    "white",    null,    null]
+    ]
+]
+`;
+ 
+var Models=JSON.parse(ModelJSON);
