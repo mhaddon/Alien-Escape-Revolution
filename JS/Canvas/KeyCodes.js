@@ -1,4 +1,4 @@
-var KEY = {
+var KeyCode = {
     BACKSPACE: 8,
     TAB: 9,
     ENTER: 13,

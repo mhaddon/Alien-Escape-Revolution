@@ -1,0 +1,500 @@
+[
+    {
+        "Type": "TextBox",
+        "Data": {
+            "Description": "textPlayGame",
+            "Position": {
+                "X": 0,
+                "Y": 170,
+                "Width": 300,
+                "Height": 100,
+                "CenterOffset": "X",
+                "Centered": "X",
+                "Parent": "containerMenu"
+            },
+            "Hover": {
+                "On": true,
+                "Colour": "rgb(35,35,35)"
+            },
+            "Text": {
+                "On": true,
+                "Value": "Play Game",
+                "Size": 62,
+                "Colour": "white",
+                "Pressed": "black"
+            },
+            "Fill": {
+                "On": true,
+                "Colour": "Black",
+                "Pressed": "White"
+            },
+            "Outline": {
+                "On": true,
+                "Colour": "grey",
+                "Pressed": "White"
+            }
+        },
+        "Events": {
+            "onRelease": [
+                {
+                    "Function": "playGame",
+                    "Parameters": []
+                }
+            ],
+            "onKeyRelease": [
+                {
+                    "KeyCode": "32",
+                    "Function": "playGame",
+                    "Parameters": []                    
+                }
+            ]
+        }
+    }, {
+        "Type": "TextBox",
+        "Data": {
+            "Description": "textShowHighscores",
+            "Position": {
+                "X": 0,
+                "Y": 295,
+                "Width": 300,
+                "Height": 100,
+                "CenterOffset": "X",
+                "Centered": "X",
+                "Parent": "containerMenu"
+            },
+            "Hover": {
+                "On": true,
+                "Colour": "rgb(35,35,35)"
+            },
+            "Text": {
+                "On": true,
+                "Value": "Highscores",
+                "Size": 62,
+                "Colour": "white",
+                "Pressed": "black"
+            },
+            "Fill": {
+                "On": true,
+                "Colour": "Black",
+                "Pressed": "White"
+            },
+            "Outline": {
+                "On": true,
+                "Colour": "grey",
+                "Pressed": "White"
+            }
+        },
+        "Events": {
+            "onRelease": [
+                {
+                    "Function": "showHighscores",
+                    "Parameters": []
+                }
+            ]
+        }
+    }, {
+        "Type": "Container",
+        "Data": {
+            "Description": "containerHighscores",
+            "Position": {
+                "X": 0,
+                "Y": 0,
+                "Width": "100%",
+                "Height": "100%"
+            },
+            "Status": {
+                "Visible": false
+            }
+        }
+    }, {
+        "Type": "TextBox",
+        "Data": {
+            "Description": "textHighscoresList",
+            "Position": {
+                "X": 0,
+                "Y": 155,
+                "Width": 330,
+                "Height": 100,
+                "CenterOffset": "X",
+                "Centered": "X",
+                "Parent": "containerHighscores"
+            },
+            "Text": {
+                "On": true,
+                "Value": "1.\r\n2.\r\n3.\r\n4.\r\n5.\r\n6.\r\n7.\r\n8.\r\n9.\r\n10.",
+                "Size": 24,
+                "Colour": "white",
+                "Pressed": "black",
+                "Font": "Calibri",
+                "Center": false,
+                "Align": "left"
+            },
+            "WrapText": {
+                "On": true
+            }
+        }
+    }, {
+        "Type": "TextBox",
+        "Data": {
+            "Description": "textHighscoresDesc",
+            "Position": {
+                "X": 0,
+                "Y": "100%-90px",
+                "Width": 400,
+                "Height": 100,
+                "CenterOffset": "X",
+                "Centered": "X",
+                "Parent": "containerHighscores"
+            },
+            "Text": {
+                "On": true,
+                "Value": "Look at all these chumps with their worthless scores!",
+                "Size": 24,
+                "Colour": "white",
+                "Pressed": "black"
+            }
+        }
+    }, {
+        "Type": "TextBox",
+        "Data": {
+            "Description": "textHighscoresDesc2",
+            "Position": {
+                "X": 0,
+                "Y": "100%-65px",
+                "Width": 400,
+                "Height": 100,
+                "CenterOffset": "X",
+                "Centered": "X",
+                "Parent": "containerHighscores"
+            },
+            "Text": {
+                "On": true,
+                "Value": "You could beat them EASILY.",
+                "Size": 24,
+                "Colour": "white",
+                "Pressed": "black"
+            }
+        }
+    }, {
+        "Type": "TextBox",
+        "Data": {
+            "Description": "textMainMenu",
+            "Position": {
+                "X": 5,
+                "Y": "100%-55px",
+                "Width": 150,
+                "Height": 50,
+                "Parent": "containerHighscores"
+            },
+            "Hover": {
+                "On": true,
+                "Colour": "rgb(35,35,35)"
+            },
+            "Text": {
+                "On": true,
+                "Value": "Main Menu",
+                "Size": 24,
+                "Colour": "white",
+                "Pressed": "black"
+            },
+            "Fill": {
+                "On": true,
+                "Colour": "Black",
+                "Pressed": "White"
+            },
+            "Outline": {
+                "On": true,
+                "Colour": "grey",
+                "Pressed": "White"
+            }
+        },
+        "Events": {
+            "onRelease": [
+                {
+                    "Function": "openMainMenu",
+                    "Parameters": []
+                }
+            ],
+            "onKeyRelease": [
+                {
+                    "KeyCode": "27",
+                    "Function": "openMainMenu",
+                    "Parameters": []
+                }
+            ]
+        }
+    }, {
+        "Type": "Container",
+        "Data": {
+            "Description": "containerGame",
+            "Position": {
+                "X": 0,
+                "Y": 0,
+                "Width": "100%",
+                "Height": "100%"
+            },
+            "Status": {
+                "Visible": false
+            }
+        },
+        "Events": {
+            "onKeyRelease": [
+                {
+                    "KeyCode": "27",
+                    "Function": "openMainMenu",
+                    "Parameters": []
+                }
+            ]
+        }
+    }, {
+        "Type": "TextBox",
+        "Data": {
+            "Description": "textScore",
+            "Position": {
+                "X": "100%-15px",
+                "Y": 20,
+                "Width": 1,
+                "Height": 50,
+                "Parent": "containerGame"
+            },
+            "Text": {
+                "On": true,
+                "Value": "",
+                "Size": 24,
+                "Colour": "white",
+                "Pressed": "black",
+                "Align": "right",
+                "Center": false
+            }
+        }
+    }, {
+        "Type": "Container",
+        "Data": {
+            "Description": "containerGameOver",
+            "Position": {
+                "X": 0,
+                "Y": 0,
+                "Width": "100%",
+                "Height": "100%"
+            },
+            "Status": {
+                "Visible": false
+            }
+        }
+    }, {
+        "Type": "TextBox",
+        "Data": {
+            "Description": "textGOScore",
+            "Position": {
+                "X": 0,
+                "Y": 165,
+                "Width": 1,
+                "CenterOffset": "X",
+                "Centered": "X",
+                "Height": 50,
+                "Parent": "containerGameOver"
+            },
+            "Text": {
+                "On": true,
+                "Value": "Score: 0",
+                "Size": 32,
+                "Colour": "white"
+            }
+        }
+    }, {
+        "Type": "TextBox",
+        "Data": {
+            "Description": "textGODesc",
+            "Position": {
+                "X": 0,
+                "Y": "100%-75px",
+                "Width": 1,
+                "Height": 50,
+                "CenterOffset": "X",
+                "Centered": "X",
+                "Parent": "containerGameOver"
+            },
+            "Text": {
+                "On": true,
+                "Value": "Oh dear... You have died...",
+                "Size": 24,
+                "Colour": "white"
+            }
+        }
+    }, {
+        "Type": "TextBox",
+        "Data": {
+            "Description": "textGODesc2",
+            "Position": {
+                "X": 0,
+                "Y": "100%-50px",
+                "Width": 1,
+                "Height": 50,
+                "CenterOffset": "X",
+                "Centered": "X",
+                "Parent": "containerGameOver"
+            },
+            "Text": {
+                "On": true,
+                "Value": "Hey, why not save your score to the highscores?!",
+                "Size": 24,
+                "Colour": "white"
+            }
+        }
+    }, {
+        "Type": "TextBox",
+        "Data": {
+            "Description": "textGOMainMenu",
+            "Position": {
+                "X": 5,
+                "Y": "100%-55px",
+                "Width": 150,
+                "Height": 50,
+                "Parent": "containerGameOver"
+            },
+            "Hover": {
+                "On": true,
+                "Colour": "rgb(35,35,35)"
+            },
+            "Text": {
+                "On": true,
+                "Value": "Main Menu",
+                "Size": 24,
+                "Colour": "white",
+                "Pressed": "black"
+            },
+            "Fill": {
+                "On": true,
+                "Colour": "Black",
+                "Pressed": "White"
+            },
+            "Outline": {
+                "On": true,
+                "Colour": "grey",
+                "Pressed": "White"
+            }
+        },
+        "Events": {
+            "onRelease": [
+                {
+                    "Function": "openMainMenu",
+                    "Parameters": []
+                }
+            ],
+            "onKeyRelease": [
+                {
+                    "KeyCode": "32",
+                    "Function": "openMainMenu",
+                    "Parameters": []                    
+                }
+            ]
+        }
+    }, {
+        "Type": "TextBox",
+        "Data": {
+            "Description": "textGOSaveScore",
+            "Position": {
+                "X": 5,
+                "Y": "100%-150px",
+                "Width": 150,
+                "Height": 50,
+                "CenterOffset": "X",
+                "Centered": "X",
+                "Parent": "containerGameOver"
+            },
+            "Hover": {
+                "On": true,
+                "Colour": "rgb(35,35,35)"
+            },
+            "Text": {
+                "On": true,
+                "Value": "Save Score!",
+                "Size": 24,
+                "Colour": "white",
+                "Pressed": "black"
+            },
+            "Fill": {
+                "On": true,
+                "Colour": "Black",
+                "Pressed": "White"
+            },
+            "Outline": {
+                "On": true,
+                "Colour": "grey",
+                "Pressed": "White"
+            }
+        },
+        "Events": {
+            "onRelease": [
+                {
+                    "Function": "saveScore",
+                    "Parameters": []
+                }
+            ]
+        }
+    }, {
+        "Type": "TextBox",
+        "Data": {
+            "Description": "textGOEnterNameTitle",
+            "Position": {
+                "X": 0,
+                "Y": 220,
+                "Width": 700,
+                "Height": 100,
+                "CenterOffset": "X",
+                "Centered": "X",
+                "Parent": "containerGameOver"
+            },
+            "Hover": {
+                "On": true,
+                "Colour": "rgb(35,35,35)"
+            },
+            "Text": {
+                "On": true,
+                "Value": "Name: ",
+                "Size": 72,
+                "Colour": "white",
+                "Pressed": "black",
+                "Align": "left"
+            },
+            "Fill": {
+                "On": true,
+                "Colour": "Black",
+                "Pressed": "White"
+            },
+            "Outline": {
+                "On": true,
+                "Colour": "grey",
+                "Pressed": "White"
+            }
+        }
+    }, {
+        "Type": "TextBox",
+        "Data": {
+            "Description": "textGOEnterName",
+            "Position": {
+                "X": 200,
+                "Y": 0,
+                "Width": 500,
+                "Height": 100,
+                "Parent": "textGOEnterNameTitle"
+            },
+            "Text": {
+                "On": true,
+                "Value": "",
+                "Size": 42,
+                "Colour": "white",
+                "Pressed": "black",
+                "Align": "left",
+                "Font": "Calibri",
+                "Center": false,
+                "Padding": 0,
+                "PaddingTop": 70
+            },
+            "TextBox": {
+                "On": true,
+                "maxLength": 14
+            }
+        }
+    }
+]
