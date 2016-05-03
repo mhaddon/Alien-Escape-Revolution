@@ -1,8 +1,8 @@
 var cEvent_Explode = function (dt) {
     if (this.Data.AI.State === AI_State.Alive) {
-        var eExplosion = findEntity('Explosion');
+        var eExplosion = Entity.find('Explosion');
 
-        var newExplosion = new Entity('LameExplosion', {
+        var newExplosion = new EntityElement('LameExplosion', {
             Data: eExplosion.Data,
             Events: eExplosion.Events,
             Behaviours: eExplosion.Behaviours
@@ -21,6 +21,6 @@ var cEvent_Explode = function (dt) {
             }
         });
 
-        Entities.push(newExplosion);
+        Entity.add(newExplosion);
     }
 };

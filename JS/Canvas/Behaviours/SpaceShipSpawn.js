@@ -15,9 +15,9 @@ var cBehaviour_SpaceShipSpawn = function (dt) {
             this.Data.BehaviourInfo.SpaceShipLastSpawnTime = now;
             this.Data.BehaviourInfo.SpaceShipMoveSpeed = (Math.random() * 0.003).min(0.001);
             
-            var eBullet = findEntity('EarthSpaceShipBullet');
-            for (var i = 0; i < Entities.length; i++) {
-                var e = Entities[i];
+            var eBullet = Entity.find('EarthSpaceShipBullet');
+            for (var i = 0; i < Entity.Elements.length; i++) {
+                var e = Entity.Elements[i];
                 if ((typeof e !== "undefined") && 
                         ((e.Data.AI.Group === AI_Group.Boulder) && 
                         (e.Data.Position.X < (Scene.Viewport.Width / 2.5)) ||
@@ -25,7 +25,7 @@ var cBehaviour_SpaceShipSpawn = function (dt) {
                         (e.Data.Position.X < (Scene.Viewport.Width / 12))) && 
                         (e.Data.AI.State === AI_State.Alive)) {
 
-                    var newBullet = new Entity('LameEarthSpaceShipBullet', {
+                    var newBullet = new EntityElement('LameEarthSpaceShipBullet', {
                         Data: eBullet.Data,
                         Events: eBullet.Events,
                         Behaviours: eBullet.Behaviours
@@ -49,7 +49,7 @@ var cBehaviour_SpaceShipSpawn = function (dt) {
                         }
                     });
 
-                    Entities.push(newBullet);
+                    Entity.add(newBullet);
                 }
 
             }
@@ -57,7 +57,7 @@ var cBehaviour_SpaceShipSpawn = function (dt) {
 
 
         if ((this.Data.BehaviourInfo.SpaceShipCurrentSpawnAmount > 0) && (this.Data.BehaviourInfo.SpaceShipLastSpawnTime + 150 < now)) {
-            var newBoulder = new Entity('LameSpaceShip', {
+            var newBoulder = new EntityElement('LameSpaceShip', {
                 Data: this.Data,
                 Events: this.Events,
                 Behaviours: this.Behaviours
@@ -75,7 +75,7 @@ var cBehaviour_SpaceShipSpawn = function (dt) {
                 }
             });
 
-            Entities.push(newBoulder);
+            Entity.add(newBoulder);
             
             cBehaviour_SpaceShipMove.apply(newBoulder, [1]);
 

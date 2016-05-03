@@ -8,7 +8,7 @@ var cBehaviour_BoulderSpawn = function (dt) {
         }
 
         if (this.Data.BehaviourInfo.BoulderSpawnTimer + this.Data.BehaviourInfo.BoulderSpawnTimerOffset < now) {
-            var newBoulder = new Entity('LameBoulder', {
+            var newBoulder = new EntityElement('LameBoulder', {
                 Data: this.Data,
                 Events: this.Events,
                 Behaviours: this.Behaviours
@@ -27,7 +27,7 @@ var cBehaviour_BoulderSpawn = function (dt) {
                 }
             });
 
-            Entities.push(newBoulder);
+            Entity.add(newBoulder);
 
             this.Data.BehaviourInfo.BoulderSpawnTimer = now;
             if ((Math.random() > 0.65) || (Game.Data.Age < 10500)) {

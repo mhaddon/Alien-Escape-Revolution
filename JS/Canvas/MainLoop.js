@@ -13,27 +13,21 @@ function mainLoop(dt) {
      * The generic, press right, you go right stuff
      */
     if (Key.isKeyPressed(KeyCode.RIGHT_ARROW, false) || Key.isKeyPressed(KeyCode.D, false)) {
-        var Player = findEntity('Player');
+        var Player = Entity.find('Player');
         Player.Data.Physics.Velocity.X += Player.Data.Physics.Thrust * dt;
     }
     if (Key.isKeyPressed(KeyCode.LEFT_ARROW, false) || Key.isKeyPressed(KeyCode.A, false)) {
-        var Player = findEntity('Player');
+        var Player = Entity.find('Player');
         Player.Data.Physics.Velocity.X -= Player.Data.Physics.Thrust * dt;
     }
     if (Key.isKeyPressed(KeyCode.DOWN_ARROW, false) || Key.isKeyPressed(KeyCode.S, false)) {
-        var Player = findEntity('Player');
+        var Player = Entity.find('Player');
         Player.Data.Physics.Velocity.Y += Player.Data.Physics.Thrust * dt;
     }
     if (Key.isKeyPressed(KeyCode.UP_ARROW, false) || Key.isKeyPressed(KeyCode.W, false)) {
-        var Player = findEntity('Player');
+        var Player = Entity.find('Player');
         Player.Data.Physics.Velocity.Y -= Player.Data.Physics.Thrust * dt;
     }
-
-    /**
-     * This bit of code is the part of code that adds a constant pressure to the player to return to the left hand side of the screen
-     * ideally it should be smoother, but id probably have to recode a lot of things
-     */
-    //Entities[0].Physics.Velocity.X -= (0.0018 * (Entities[0].X / scene.Viewport.Width)) * dt;
     
     
     /**

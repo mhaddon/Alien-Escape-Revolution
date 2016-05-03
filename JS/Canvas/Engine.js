@@ -43,10 +43,10 @@ function main() {
         showFPS(dt);
 
         if (!Game.Data.inMenu) {
-            checkCollisions(dt);
+            Entity.checkCollisions(dt);
             mainLoop(dt);
             Atmosphere.draw(dt);
-            drawEntities(dt);
+            Entity.renderAll(dt);
         }
     }
 
@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     loadJSON("Data/Entities.json", function (obj) {
         obj.forEach(function (e) {
-            Entities.push(new Entity(e.Data.Description, e));
+            Entity.add(new EntityElement(e.Data.Description, e));
         });
     });
 

@@ -36,7 +36,7 @@ var GameController = function (settings) {
     this.reset = function () {
         Game.resetScore();
 
-        findEntity('Player').import({
+        Entity.find('Player').import({
             Data: {
                 Position: {
                     X: 600,
@@ -50,13 +50,8 @@ var GameController = function (settings) {
                 }
             }
         });
-
-        for (var i = 0; i < Entities.length; i++) {
-            var e = Entities[i];
-            if ((e.Data.AI.Protected === false) && (e.kill())) {
-                i--;
-            }
-        }
+        
+        Entity.killNonProtected();
 
         Dashes = new Array();
 

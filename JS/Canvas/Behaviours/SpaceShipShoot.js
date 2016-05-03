@@ -9,9 +9,9 @@ var cBehaviour_SpaceShipShoot = function (dt) {
 
 
         if (this.Data.BehaviourInfo.SpaceShipLastBulletTime + this.Data.BehaviourInfo.SpaceShipNextBulletTime < now) {
-            var eBullet = findEntity('EarthSpaceShipBullet');
+            var eBullet = Entity.find('EarthSpaceShipBullet');
 
-            var newBullet = new Entity('LameEarthSpaceShipBullet', {
+            var newBullet = new EntityElement('LameEarthSpaceShipBullet', {
                 Data: eBullet.Data,
                 Events: eBullet.Events,
                 Behaviours: eBullet.Behaviours
@@ -35,7 +35,7 @@ var cBehaviour_SpaceShipShoot = function (dt) {
                 }
             });
 
-            Entities.push(newBullet);
+            Entity.add(newBullet);
 
             this.Data.BehaviourInfo.SpaceShipNextBulletTime = 500 + (Math.random() * 7000);
             this.Data.BehaviourInfo.SpaceShipLastBulletTime = now;
