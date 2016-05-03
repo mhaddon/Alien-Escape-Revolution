@@ -20,7 +20,7 @@ Container.add(new ContainerElement('containerTitle', {
     }
 }));
 
-Container.add(new TextBox('textGameTitle', {
+Container.add(new ContainerElement_TextBox('textGameTitle', {
     Data: {
         Position: {
             X: 0,
@@ -40,7 +40,7 @@ Container.add(new TextBox('textGameTitle', {
     }
 }));
 
-Container.add(new TextBox('textGameTitleDesc', {
+Container.add(new ContainerElement_TextBox('textGameTitleDesc', {
     Data: {
         Position: {
             X: 0,
@@ -65,7 +65,7 @@ Container.add(new TextBox('textGameTitleDesc', {
     }
 }));
 
-Container.add(new TextBox('textGameDesc', {
+Container.add(new ContainerElement_TextBox('textGameDesc', {
     Data: {
         Position: {
             X: 0,

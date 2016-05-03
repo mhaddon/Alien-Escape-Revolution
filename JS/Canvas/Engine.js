@@ -148,9 +148,9 @@ document.addEventListener('DOMContentLoaded', function () {
     loadJSON("Data/Containers.json", function (obj) {
         obj.forEach(function (e) {
             if (e.Type === "TextBox") {
-                Container.add(new TextBox(e.Data.Description, e));
+                Container.add(new ContainerElement_TextBox(e.Data.Description, e));
             } else if (e.Type === "PictureBox") {
-                Container.add(new PictureBox(e.Data.Description, e));
+                Container.add(new ContainerElement_PictureBox(e.Data.Description, e));
             } else {
                 Container.add(new ContainerElement(e.Data.Description, e));
             }

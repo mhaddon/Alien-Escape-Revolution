@@ -9,9 +9,9 @@
  * 
  * @param {String} name
  * @param {String} settings
- * @returns {TextBox}
+ * @returns {ContainerElement_TextBox}
  */
-var TextBox = function (name, settings) {
+var ContainerElement_TextBox = function (name, settings) {
     this.constructor(name, settings);
     this.import({
         Data: {
@@ -106,7 +106,7 @@ var TextBox = function (name, settings) {
             },
             /**
              * The below is a class for an editable version of the text ContainerElement
-             * The textbox feature is currently not fully implemented
+             * The ContainerElement_TextBox feature is currently not fully implemented
              */
             TextBox: {
                 On: false,
@@ -143,8 +143,8 @@ var TextBox = function (name, settings) {
     });
 }
 
-TextBox.prototype = Object.create(ContainerElement.prototype);
-TextBox.prototype.constructor = ContainerElement;
+ContainerElement_TextBox.prototype = Object.create(ContainerElement.prototype);
+ContainerElement_TextBox.prototype.constructor = ContainerElement;
 
 /**
  * This function turns a string of text into an array of strings which are wordwrapped
@@ -170,7 +170,7 @@ TextBox.prototype.constructor = ContainerElement;
  * 
  * @returns {Array}
  */
-TextBox.prototype.wrapText = function () {
+ContainerElement_TextBox.prototype.wrapText = function () {
     if ((this.Data.WrapText.On) && ((this.Data.Text.Value !== this.Data.WrapText.UnwrappedText) || (this.Data.WrapText.currentCacheID !== Scene.resizeCachedID))) {
         var Text = this.Data.Text.Value.toString().split(/\r?\n/g);
         var Coords = this.getCoords();
@@ -212,7 +212,7 @@ TextBox.prototype.wrapText = function () {
  * @param {Integer} index
  * @returns {Integer}
  */
-TextBox.prototype.getClosestSpace = function (Text, index) {
+ContainerElement_TextBox.prototype.getClosestSpace = function (Text, index) {
     var ClosestSpace = -1000;
 
     for (var i = index; i >= 0; i--) {
@@ -227,12 +227,12 @@ TextBox.prototype.getClosestSpace = function (Text, index) {
 }
 
 /**
- * When the textbox info has changed
+ * When the ContainerElement_TextBox info has changed
  * This function operates behind the scenes
  * @type function
  * @returns {null}
  */
-TextBox.prototype._onChanged = function () {
+ContainerElement_TextBox.prototype._onChanged = function () {
     this.Data.TextBox._oldValue = this.Data.TextBox.Value;
 
     if (this.Events.onChanged.length > 0) {
@@ -257,7 +257,7 @@ TextBox.prototype._onChanged = function () {
  * @param {Integer} dt
  * @returns {undefined}
  */
-TextBox.prototype.drawText = function (X, Y, dt) {
+ContainerElement_TextBox.prototype.drawText = function (X, Y, dt) {
     if (this.Data.Text.On) {
         var Coords = this.getCoords();
 
@@ -307,8 +307,7 @@ TextBox.prototype.drawText = function (X, Y, dt) {
 }
 
 /**
- * This method is for editable TextBox elements, but is not fully supported as 
- * the site does not have any editable TextBox elements.
+ * This method is for editable TextBox elements
  * 
  * It is meant to record that the element is currently being selected, for future
  * keyboard inputs.

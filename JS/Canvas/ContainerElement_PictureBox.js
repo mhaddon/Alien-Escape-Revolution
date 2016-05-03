@@ -14,9 +14,9 @@ var LoadedImages = [];
  * 
  * @param {String} name
  * @param {Object} settings
- * @returns {PictureBox}
+ * @returns {ContainerElement_PictureBox}
  */
-var PictureBox = function (name, settings) {
+var ContainerElement_PictureBox = function (name, settings) {
     this.constructor(name, settings);
 
     this.import({
@@ -68,8 +68,8 @@ var PictureBox = function (name, settings) {
     this.RenderQueue.add("drawPictures");
 }
 
-PictureBox.prototype = Object.create(ContainerElement.prototype);
-PictureBox.prototype.constructor = ContainerElement;
+ContainerElement_PictureBox.prototype = Object.create(ContainerElement.prototype);
+ContainerElement_PictureBox.prototype.constructor = ContainerElement;
 
 /**
  * This method draws the loaded picture onto the screen.
@@ -88,7 +88,7 @@ PictureBox.prototype.constructor = ContainerElement;
  * @param {Number} Opacity
  * @returns {undefined}
  */
-PictureBox.prototype.drawPicture = function (X, Y, dt, ImageURL, Opacity) {
+ContainerElement_PictureBox.prototype.drawPicture = function (X, Y, dt, ImageURL, Opacity) {
     /**
      * First we need to find out if we have already loaded this image on this page before
      * we Base64 the URL of the image to create a uniform naming system with basic characters
@@ -147,7 +147,7 @@ PictureBox.prototype.drawPicture = function (X, Y, dt, ImageURL, Opacity) {
  * @param {Number} dt
  * @returns {undefined}
  */
-PictureBox.prototype.drawPictures = function (X, Y, dt) {
+ContainerElement_PictureBox.prototype.drawPictures = function (X, Y, dt) {
     /**
      * If there are no image sources... then theres nothing we can draw...
      */
@@ -216,7 +216,7 @@ PictureBox.prototype.drawPictures = function (X, Y, dt) {
  * @param {type} _Mouse
  * @returns {Boolean}
  */
-PictureBox.prototype.isHovered = function (_Mouse) {
+ContainerElement_PictureBox.prototype.isHovered = function (_Mouse) {
     var Coords = this.getCoords();
     
     var returnVar = false;
