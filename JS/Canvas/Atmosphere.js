@@ -1,4 +1,4 @@
-var cAtmosphere = function (settings) {
+var AtmosphereController = function (settings) {
 
     this.Data = {
         Info: {
@@ -13,7 +13,7 @@ var cAtmosphere = function (settings) {
     };
 };
 
-cAtmosphere.prototype.drawDashes = function (dt) {
+AtmosphereController.prototype.drawDashes = function (dt) {
     var now = Date.now();
     
 
@@ -39,8 +39,8 @@ cAtmosphere.prototype.drawDashes = function (dt) {
     }
 }
 
-cAtmosphere.prototype.draw = function (dt) {
+AtmosphereController.prototype.draw = function (dt) {
     this.drawDashes(dt);
 }
 
-var Atmosphere = new cAtmosphere;
+var Atmosphere = new AtmosphereController;

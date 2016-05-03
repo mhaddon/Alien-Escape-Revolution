@@ -1,5 +1,5 @@
 /**
- * This class is responsible for handling container elements with text 
+ * This class is responsible for handling ContainerElement elements with text 
  * 
  * Text drawing is suprisingly computational heavy, and some things may need to
  * be done to speed this up
@@ -42,7 +42,7 @@ var TextBox = function (name, settings) {
                  */
                 Value: "...",
                 /**
-                 * What is the texts padding, from the outside of the container
+                 * What is the texts padding, from the outside of the ContainerElement
                  */
                 Padding: 15,
                 PaddingTop: 0,
@@ -83,7 +83,7 @@ var TextBox = function (name, settings) {
                 Opacity: 1
             },
             /**
-             * Do we want to wrap this text to fit the container it is in?
+             * Do we want to wrap this text to fit the ContainerElement it is in?
              */
             WrapText: {
                 On: false,
@@ -105,7 +105,7 @@ var TextBox = function (name, settings) {
                 SpaceDistance: 14
             },
             /**
-             * The below is a class for an editable version of the text container
+             * The below is a class for an editable version of the text ContainerElement
              * The textbox feature is currently not fully implemented
              */
             TextBox: {
@@ -143,8 +143,8 @@ var TextBox = function (name, settings) {
     });
 }
 
-TextBox.prototype = Object.create(Container.prototype);
-TextBox.prototype.constructor = Container;
+TextBox.prototype = Object.create(ContainerElement.prototype);
+TextBox.prototype.constructor = ContainerElement;
 
 /**
  * This function turns a string of text into an array of strings which are wordwrapped
@@ -249,7 +249,7 @@ TextBox.prototype._onChanged = function () {
 
 /**
  * This method draws the text to the screen, it is added to the RenderQueue in
- * Container
+ * ContainerElement
  * 
  * 
  * @param {Integer} X

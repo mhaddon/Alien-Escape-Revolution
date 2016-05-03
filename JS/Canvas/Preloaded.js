@@ -1,4 +1,4 @@
-Containers.push(new Container('containerMenu', {
+Container.add(new ContainerElement('containerMenu', {
     Data: {
         Position: {
             X: 0,
@@ -9,7 +9,7 @@ Containers.push(new Container('containerMenu', {
     }
 }));
 
-Containers.push(new Container('containerTitle', {
+Container.add(new ContainerElement('containerTitle', {
     Data: {
         Position: {
             X: 0,
@@ -20,7 +20,7 @@ Containers.push(new Container('containerTitle', {
     }
 }));
 
-Containers.push(new TextBox('textGameTitle', {
+Container.add(new TextBox('textGameTitle', {
     Data: {
         Position: {
             X: 0,
@@ -40,7 +40,7 @@ Containers.push(new TextBox('textGameTitle', {
     }
 }));
 
-Containers.push(new TextBox('textGameTitleDesc', {
+Container.add(new TextBox('textGameTitleDesc', {
     Data: {
         Position: {
             X: 0,
@@ -65,7 +65,7 @@ Containers.push(new TextBox('textGameTitleDesc', {
     }
 }));
 
-Containers.push(new TextBox('textGameDesc', {
+Container.add(new TextBox('textGameDesc', {
     Data: {
         Position: {
             X: 0,

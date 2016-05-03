@@ -25,11 +25,11 @@ function playGame(e) {
      * Hide the various button stuff for the homepage.
      * 
      */
-    findContainer('containerMenu').Data.Status.Visible = false;
-    findContainer('containerHighscores').Data.Status.Visible = false;
-    findContainer('containerTitle').Data.Status.Visible = false;
-    findContainer('containerGame').Data.Status.Visible = true;
-    findContainer('containerGameOver').Data.Status.Visible = false;
+    Container.find('containerMenu').Data.Status.Visible = false;
+    Container.find('containerHighscores').Data.Status.Visible = false;
+    Container.find('containerTitle').Data.Status.Visible = false;
+    Container.find('containerGame').Data.Status.Visible = true;
+    Container.find('containerGameOver').Data.Status.Visible = false;
 }
 
 /**
@@ -48,16 +48,16 @@ function showHighscores(e) {
      * Hide the various button stuff for the homepage.
      * 
      */
-    findContainer('containerMenu').Data.Status.Visible = false;
-    findContainer('containerTitle').Data.Status.Visible = true;
-    findContainer('containerHighscores').Data.Status.Visible = true;
-    findContainer('containerGame').Data.Status.Visible = false;
-    findContainer('containerGameOver').Data.Status.Visible = false;
+    Container.find('containerMenu').Data.Status.Visible = false;
+    Container.find('containerTitle').Data.Status.Visible = true;
+    Container.find('containerHighscores').Data.Status.Visible = true;
+    Container.find('containerGame').Data.Status.Visible = false;
+    Container.find('containerGameOver').Data.Status.Visible = false;
 }
 
 function loadHighscores(obj) {
 
-    var textHighscoresList = findContainer('textHighscoresList');
+    var textHighscoresList = Container.find('textHighscoresList');
 
     obj.sort(compareScore);
 
@@ -103,11 +103,11 @@ function openMainMenu(e) {
      * Hide the various button stuff for the homepage.
      * 
      */
-    findContainer('containerMenu').Data.Status.Visible = true;
-    findContainer('containerTitle').Data.Status.Visible = true;
-    findContainer('containerHighscores').Data.Status.Visible = false;
-    findContainer('containerGame').Data.Status.Visible = false;
-    findContainer('containerGameOver').Data.Status.Visible = false;
+    Container.find('containerMenu').Data.Status.Visible = true;
+    Container.find('containerTitle').Data.Status.Visible = true;
+    Container.find('containerHighscores').Data.Status.Visible = false;
+    Container.find('containerGame').Data.Status.Visible = false;
+    Container.find('containerGameOver').Data.Status.Visible = false;
 }
 
 
@@ -116,24 +116,24 @@ function showGameOver(e) {
     Game.Data.inMenu = true; //take off our stabalisers
 
 
-    findContainer('textGOScore').Data.Text.Value = "Score: " + Game.getScore();
+    Container.find('textGOScore').Data.Text.Value = "Score: " + Game.getScore();
 
     /**
      * Hide the various button stuff for the homepage.
      * 
      */
-    findContainer('containerTitle').Data.Status.Visible = true;
-    findContainer('containerGameOver').Data.Status.Visible = true;
-    findContainer('containerHighscores').Data.Status.Visible = false;
-    findContainer('containerGame').Data.Status.Visible = false;
-    findContainer('containerMenu').Data.Status.Visible = false;
+    Container.find('containerTitle').Data.Status.Visible = true;
+    Container.find('containerGameOver').Data.Status.Visible = true;
+    Container.find('containerHighscores').Data.Status.Visible = false;
+    Container.find('containerGame').Data.Status.Visible = false;
+    Container.find('containerMenu').Data.Status.Visible = false;
 }
 
 function saveScore(e) {
     if (window.localStorage) {
         var Highscores = JSON.parse(window.localStorage.getItem('aeHighscores'));
 
-        var Name = findContainer('textGOEnterName').Data.TextBox.Value;
+        var Name = Container.find('textGOEnterName').Data.TextBox.Value;
 
         if (Name.length === 0) {
             Name = "Guest";

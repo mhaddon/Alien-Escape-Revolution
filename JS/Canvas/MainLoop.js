@@ -36,5 +36,5 @@ function mainLoop(dt) {
     Scene.canvas.style.backgroundPositionX = (-(Math.round(Game.getScore() / 2))) + 'px';
     Scene.canvas.style.backgroundRepeat = 'no-repeat'; //this has to be redefined constantly because everyone loves css
     
-    findContainer('textScore').Data.Text.Value = Math.floor(Game.getScore());
+    Container.find('textScore').Data.Text.Value = Math.floor(Game.getScore());
 }

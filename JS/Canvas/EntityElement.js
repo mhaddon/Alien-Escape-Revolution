@@ -123,7 +123,7 @@ var EntityElement = function (name, settings) {
     };
 
     /**
-     * This class holds the various return information from the container
+     * This class holds the various return information from the entity
      * The reason this is seperated is that we can append new return information to this
      * This is so the children can append whichever return data they need
      */
@@ -205,7 +205,7 @@ EntityElement.prototype.loadObject = function (name, settings) {
 }
 
 EntityElement.prototype.getModel = function () {
-    return findModel(this.Data.Model.Name);
+    return Model.find(this.Data.Model.Name);
 }
 
 EntityElement.prototype.drawModel = function () {
@@ -328,7 +328,7 @@ EntityElement.prototype.updatePosition = function (dt) {
         this.Data.Position.Y += this.Data.Physics.Velocity.Y * dt;
 
         if (this.Data.Description === "Player") {
-            var eModel = findModel(this.Data.Model.Name);
+            var eModel = Model.find(this.Data.Model.Name);
             if (this.Data.Position.Y > Scene.Viewport.Height - eModel.getHeight()) {
                 this.Data.Position.Y = Scene.Viewport.Height - eModel.getHeight();
                 this.Data.Physics.Velocity.Y = 0;

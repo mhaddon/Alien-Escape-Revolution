@@ -1,78 +1,35 @@
-var Model = function (name, settings) {
-    this.Data = {
-        Description: "None",
-        AnimationSpeed: 25,
-        Tile_Size: 5,
-        Frames: []
-    }
-
-
-    this.loadObject(name, settings);
-
+var ModelController = function() {
+    this.Elements = new Array();
+    
+    this.Data = {};
+    
     return {
+        find: this.find,
+        Elements: this.Elements,
         Data: this.Data,
-        draw: this.draw,
-        getHeight: this.getHeight,
-        getWidth: this.getWidth
+        renderAll: this.renderAll,
+        add: this.add
     }
 }
 
-Model.prototype.import = function (settings) {
-    /**
-     * I need to recode this function, i just cant think at the moment
-     */
-    for (var greaterPropertyName in settings) {
-        /**
-         * We dont want to overide variables that should be protected
-         */
-        if ((greaterPropertyName === 'Data')) {
-            mergeDeep(this[greaterPropertyName], settings[greaterPropertyName]);
-        }
-    }
-}
-
-Model.prototype.loadObject = function (name, settings) {
-    this.import(settings);
-
-    this.Data.Description = name;
-}
-
-Model.prototype.draw = function (X, Y, FrameID) {
-    for (var frameY = 0; frameY < this.Data.Frames[FrameID].length; frameY++) {
-        for (var frameX = 0; frameX < this.Data.Frames[FrameID][frameY].length; frameX++) {
-            var e = this.Data.Frames[FrameID][frameY][frameX];
-            if (e !== null) {
-                Scene.context.beginPath();
-                Scene.context.fillStyle = e;
-                Scene.context.rect(X + (frameX * this.Data.Tile_Size), Y + (frameY * this.Data.Tile_Size), this.Data.Tile_Size, this.Data.Tile_Size);
-                Scene.context.fill();
-            }
-        }
-    }
-}
-
-Model.prototype.getWidth = function () {
-    return this.Data.Frames[0][0].length * this.Data.Tile_Size;
-}
-
-Model.prototype.getHeight = function () {
-    return this.Data.Frames[0].length * this.Data.Tile_Size;
-}
-
-var Models = new Array();
-
-function drawModels(dt) {
-    Models.forEach(function (e) {
-        e.draw(dt);
-    });
-}
-
-function findModel(name) {
-    for (var i = 0; i < Models.length; i++) {
-        var e = Models[i];
+ModelController.prototype.find = function(name) {
+    for (var i = 0; i < this.Elements.length; i++) {
+        var e = this.Elements[i];
         if (name === e.Data.Description) {
             return e;
         }
     }
-    return false;
+    return false;    
 }
+
+ModelController.prototype.renderAll = function (dt) {
+    this.Elements.forEach(function (e) {
+        e.draw(dt);
+    });
+}
+
+ModelController.prototype.add = function (ModelElement) {
+    this.Elements.push(ModelElement);
+}
+
+var Model = new ModelController;

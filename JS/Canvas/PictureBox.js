@@ -8,7 +8,7 @@
 var LoadedImages = [];
 
 /**
- * This function is a child of Container, it handles the loading and rendering of
+ * This function is a child of ContainerElement, it handles the loading and rendering of
  * images.
  * It can also work as a slideshow for multiple images.
  * 
@@ -68,8 +68,8 @@ var PictureBox = function (name, settings) {
     this.RenderQueue.add("drawPictures");
 }
 
-PictureBox.prototype = Object.create(Container.prototype);
-PictureBox.prototype.constructor = Container;
+PictureBox.prototype = Object.create(ContainerElement.prototype);
+PictureBox.prototype.constructor = ContainerElement;
 
 /**
  * This method draws the loaded picture onto the screen.

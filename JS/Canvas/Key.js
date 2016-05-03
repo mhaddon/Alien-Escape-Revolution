@@ -51,10 +51,11 @@ var Key = new (function (settings) {
         }
 
         this.writeText(e);
+        Container.registerKeyPress(e.keyCode);
     }
 
     this.writeText = function (e) {
-        var SelectedTextBox = findContainer(Scene.SelectedTextBox);
+        var SelectedTextBox = Container.find(Scene.SelectedTextBox);
         if (SelectedTextBox) {
             SelectedTextBox.Data.TextBox.Value = String(SelectedTextBox.Data.TextBox.Value);
 
@@ -96,23 +97,8 @@ var Key = new (function (settings) {
         if (keyIndex !== false) {
             this.keyArray.splice(keyIndex, 1);
         }
-
-        if (Scene.SelectedTextBox === null) {
-            for (var i = 0; i < Containers.length; i++) {
-                var container = Containers[i];
-
-                if ((container.Events.onKeyRelease.length > 0) && (container.getCoords().Visible)) {
-                    for (var b = 0; b < container.Events.onKeyRelease.length; b++) {
-                        if (container.Events.onKeyRelease[b].KeyCode == e.keyCode) {
-                            var fn = window[container.Events.onKeyRelease[b].Function];
-                            if (typeof fn === "function") {
-                                fn.apply(this, container.Events.onKeyRelease[b].Parameters);
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        
+        Container.registerKeyRelease(e.keyCode);
     }
 
     return {

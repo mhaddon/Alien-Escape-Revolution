@@ -39,7 +39,7 @@ function main() {
         Scene.sync();
 
         Scene.cachedID = now;
-        drawContainers(dt);
+        Container.renderAll(dt);
         showFPS(dt);
 
         if (!Game.Data.inMenu) {
@@ -148,20 +148,20 @@ document.addEventListener('DOMContentLoaded', function () {
     loadJSON("Data/Containers.json", function (obj) {
         obj.forEach(function (e) {
             if (e.Type === "TextBox") {
-                Containers.push(new TextBox(e.Data.Description, e));
+                Container.add(new TextBox(e.Data.Description, e));
             } else if (e.Type === "PictureBox") {
-                Containers.push(new PictureBox(e.Data.Description, e));
+                Container.add(new PictureBox(e.Data.Description, e));
             } else {
-                Containers.push(new Container(e.Data.Description, e));
+                Container.add(new ContainerElement(e.Data.Description, e));
             }
         });
 
-        findContainer('textGameDesc').Data.Text.Value = "Can you escape earth and safely navigate the asteroids?";
+        Container.find('textGameDesc').Data.Text.Value = "Can you escape earth and safely navigate the asteroids?";
     });
 
     loadJSON("Data/Models.json", function (obj) {
         obj.forEach(function (e) {
-            Models.push(new Model(e.Data.Description, e));
+            Model.add(new ModelElement(e.Data.Description, e));
         });
     });
 
