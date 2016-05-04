@@ -171,6 +171,12 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    loadJSON("Data/Audio.json", function (obj) {
+        obj.forEach(function (e) {
+            Audio.add(new AudioElement(e.Data.Description, e));
+        });
+    });
+
     loadJSON("Data/Highscores.json", function (obj) {
         if (window.localStorage) {
             if (!window.localStorage.getItem('aeHighscores')) {
