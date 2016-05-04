@@ -39,7 +39,7 @@ ContainerController.prototype.add = function (ContainerElement) {
 }
 
 ContainerController.prototype.registerKeyRelease = function (keyCode) {
-    if (Scene.SelectedTextBox === null) {
+    if (Scene.Data.Info.SelectedTextBox === null) {
         for (var i = 0; i < this.Elements.length; i++) {
             var ContainerElement = this.Elements[i];
 
@@ -58,7 +58,7 @@ ContainerController.prototype.registerKeyRelease = function (keyCode) {
 }
 
 ContainerController.prototype.registerKeyPress = function (keyCode) {
-    if (Scene.SelectedTextBox === null) {
+    if (Scene.Data.Info.SelectedTextBox === null) {
         for (var i = 0; i < this.Elements.length; i++) {
             var ContainerElement = this.Elements[i];
 
@@ -84,14 +84,14 @@ ContainerController.prototype.registerMouseDown = function () {
         if ((!e.Data.Status.Pressed) && e.isHovered(Mouse)) {
             e._onClick();
 
-            if (e.Data.Description === Scene.SelectedTextBox) {
+            if (e.Data.Description === Scene.Data.Info.SelectedTextBox) {
                 ContainerElementsAffected++;
             }
         }
     }
 
     if (ContainerElementsAffected === 0) {
-        Scene.SelectedTextBox = null;
+        Scene.Data.Info.SelectedTextBox = null;
     }
 }
 
@@ -102,14 +102,14 @@ ContainerController.prototype.registerMouseRelease = function () {
         if ((e.Data.Status.Pressed) && e.isHovered(Mouse)) {
             e._onRelease();
 
-            if (e.Data.Description === Scene.SelectedTextBox) {
+            if (e.Data.Description === Scene.Data.Info.SelectedTextBox) {
                 ContainerElementsAffected++;
             }
         }
     }
 
     if (ContainerElementsAffected === 0) {
-        Scene.SelectedTextBox = null;
+        Scene.Data.Info.SelectedTextBox = null;
     }
 }
 

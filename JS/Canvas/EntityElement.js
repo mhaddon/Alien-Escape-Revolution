@@ -228,7 +228,6 @@ EntityElement.prototype.drawModel = function () {
 
 EntityElement.prototype.draw = function (dt) {
     if (this.Data.AI.State === AI_State.Alive) {
-        this.updatePosition(dt);
         this.drawModel(dt);
     }
 }
@@ -319,7 +318,7 @@ EntityElement.prototype.kill = function (dt) {
 }
 
 EntityElement.prototype.updatePosition = function (dt) {
-    if ((this.Data.Physics.Velocity.Y !== 0) || (this.Data.Physics.Velocity.X !== 0)) {
+    if (((this.Data.AI.State === AI_State.Alive) && (this.Data.Physics.Velocity.Y !== 0) || (this.Data.Physics.Velocity.X !== 0))) {
 
         this.Data.Physics.Velocity.X = this.Data.Physics.Velocity.X.min(-this.Data.Physics.MaxSpeed).max(this.Data.Physics.MaxSpeed);
         this.Data.Physics.Velocity.Y = this.Data.Physics.Velocity.Y.min(-this.Data.Physics.MaxSpeed).max(this.Data.Physics.MaxSpeed);
@@ -369,7 +368,6 @@ EntityElement.prototype.updatePosition = function (dt) {
 }
 
 EntityElement.prototype.handleBehaviours = function (dt) {
-
     for (var i = 0; i < this.Behaviours.length; i++) {
         var e = this.Behaviours[i];
 

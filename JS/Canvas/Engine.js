@@ -38,14 +38,14 @@ function main() {
     if (dt < 1000) {
         Scene.sync();
 
-        Scene.cachedID = now;
+        Scene.Data.CacheID.Positional = now;
         Container.renderAll(dt);
         showFPS(dt);
 
         if (!Game.Data.inMenu) {
             Entity.checkCollisions(dt);
             mainLoop(dt);
-            Atmosphere.draw(dt);
+            Dash.renderAll(dt);
             Entity.renderAll(dt);
         }
     }

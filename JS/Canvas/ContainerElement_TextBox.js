@@ -291,7 +291,7 @@ ContainerElement_TextBox.prototype.drawText = function (X, Y, dt) {
             if (this.Data.TextBox.On) {
                 Text.Value += this.Data.TextBox.Value;
             }
-            if (this.Data.Description === Scene.SelectedTextBox) {
+            if (this.Data.Description === Scene.Data.Info.SelectedTextBox) {
                 Text.Value += (Math.round((new Date().getTime() / 1000) / 0.5) % 2) ? "_" : " ";
             }
 
@@ -317,6 +317,6 @@ ContainerElement_TextBox.prototype.drawText = function (X, Y, dt) {
  */
 var selectTextBox = function (target) {
     if (target.Data.TextBox.On) {
-        Scene.SelectedTextBox = target.Data.Description;
+        Scene.Data.Info.SelectedTextBox = target.Data.Description;
     }
 }

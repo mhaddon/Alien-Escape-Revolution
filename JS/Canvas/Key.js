@@ -55,12 +55,12 @@ var Key = new (function (settings) {
     }
 
     this.writeText = function (e) {
-        var SelectedTextBox = Container.find(Scene.SelectedTextBox);
+        var SelectedTextBox = Container.find(Scene.Data.Info.SelectedTextBox);
         if (SelectedTextBox) {
             SelectedTextBox.Data.TextBox.Value = String(SelectedTextBox.Data.TextBox.Value);
 
             if ((e.keyCode == KeyCode.ENTER) || (e.keyCode == KeyCode.ESCAPE)) { //If the user pressed enter of escape, we can assume they want to stop editing this textbox
-                Scene.SelectedTextBox = null;
+                Scene.Data.Info.SelectedTextBox = null;
             } else if ((e.keyCode == KeyCode.BACKSPACE) && (SelectedTextBox.Data.TextBox.Value.length > 0)) { //if the user did backspace, then we can assume they want to remove stuff
                 SelectedTextBox.Data.TextBox.Value = SelectedTextBox.Data.TextBox.Value.substring(0, SelectedTextBox.Data.TextBox.Value.length - 1);
             } else if ((String.fromCharCode(e.keyCode)) && (SelectedTextBox.Data.TextBox.Value.length < SelectedTextBox.Data.TextBox.maxLength)) { //otherwise we add this key to the textbox, if its valid

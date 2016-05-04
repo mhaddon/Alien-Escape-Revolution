@@ -58,6 +58,9 @@ EntityController.prototype.renderAll = function (dt) {
         e.handleBehaviours(dt);
     });
     this.Elements.forEach(function (e) {
+        e.updatePosition(dt);
+    });
+    this.Elements.forEach(function (e) {
         e.draw(dt);
     });
 }

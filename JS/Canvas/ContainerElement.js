@@ -947,7 +947,7 @@ ContainerElement.prototype.convertPositionalString = function (PositionalValue, 
  */
 ContainerElement.prototype.getCache = function () {
     var returnVar = ((this.Data.Position.CachePositioning) &&
-            (typeof this.AbsolutePosition !== "undefined") && (this.AbsolutePosition !== null) && (this.Data.Position.currentCacheID === Scene.cachedID));
+            (typeof this.AbsolutePosition !== "undefined") && (this.AbsolutePosition !== null) && (this.Data.Position.currentCacheID === Scene.Data.CacheID.Positional));
 
     return (returnVar ? this.AbsolutePosition : false);
 }
@@ -991,7 +991,7 @@ ContainerElement.prototype.calculatePosition = function () {
     /**
      * Update the currentCacheID's so future getCache requests should return true
      */
-    this.Data.Position.currentCacheID = Scene.cachedID;
+    this.Data.Position.currentCacheID = Scene.Data.CacheID.Positional;
 
     /**
      * Return the relevent positional information

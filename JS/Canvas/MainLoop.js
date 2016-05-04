@@ -5,8 +5,6 @@
  * @returns {undefined}
  */
 function mainLoop(dt) {
-    var now = Date.now();
-    
     Game.addAge(dt);
     
     /**

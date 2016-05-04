@@ -1,103 +1,63 @@
-var Dash = function (settings) {
+var DashController = function () {
+    this.Elements = new Array();
+
     this.Data = {
-        Position: {
-            X: 0,
-            Y: 0,
-            Width: 0,
-            Height: 0,
-            nw: 0
-        },
-        Info: {
-            Opacity: 1,
-            Colour: "black"
-        }
+        lastRender: 0
     };
 
-    this.loadObject(settings);
-
     return {
-        Data: this.Data,
-        draw: this.draw,
-        import: this.import,
-        loadObject: this.loadObject,
-        kill: this.kill
+        Elements: this.Elements,
+        add: this.add,
+        removeElement: this.removeElement,
+        killAll: this.killAll,
+        renderAll: this.renderAll,
+        Data: this.Data
     }
-};
+}
 
-/**
- * This function is responsible for importing an object of data into this class
- * It uses a deepmerge in order to achieve this.
- *
- *
- * @param {Object} settings
- * @returns {undefined}
- */
-Dash.prototype.import = function (settings) {
-    /**
-     * I need to recode this function, i just cant think at the moment
-     */
-    for (var greaterPropertyName in settings) {
-        /**
-         * We dont want to overide variables that should be protected
-         */
-        if (greaterPropertyName === 'Data') {
-            mergeDeep(this[greaterPropertyName], settings[greaterPropertyName]);
+DashController.prototype.add = function (DashElement) {
+    this.Elements.push(DashElement);
+}
+
+DashController.prototype.removeElement = function (DashElement) {
+    for (var i = 0; i < this.Elements.length; i++) {
+        var e = this.Elements[i];
+        if (DashElement === e) {
+            this.Elements.splice(i, 1);
+            return true;
         }
     }
+    return false;
 }
 
-/**
- * This class will load a current object into the system, it will also ensure that
- * the Description contains the correct name. This is so we can find this object
- * in future.
- *
- * @param {String} name
- * @param {Object} settings
- * @returns {undefined}
- */
-Dash.prototype.loadObject = function (settings) {
-    this.import(settings);
+DashController.prototype.killAll = function () {
+    this.Elements = new Array();
 }
 
-Dash.prototype.draw = function (dt) {
-    Scene.context.beginPath();
-    
-    var moveSpeed = (dt * 0.65) * (1 - Game.getDifficultyModifier());
+DashController.prototype.renderAll = function (dt) {
+    var now = Date.now();
 
 
-    this.Data.Position.nw += moveSpeed;
-    this.Data.Position.nw = this.Data.Position.nw.max(500);
-    this.Data.Position.X -= moveSpeed;
+    if (this.Data.lastRender + (250 * (1 - Game.getDifficultyModifier())) < now) {
+        Dash.add(new DashElement({
+            Data: {
+                Position: {
+                    X: (Scene.Viewport.Width * 0.75) + Math.random() * (Scene.Viewport.Width * 0.25),
+                    Y: Math.random() * Scene.Viewport.Height,
+                    Height: Math.random() * (4 * Game.getDifficultyModifier()).max(4).min(1)
+                },
+                Info: {
+                    Colour: "white"
+                }
+            }
+        }));
 
-    var Opacity = (1 - (this.Data.Position.nw / 500)) * 0.55;
-
-
-    //Scene.context.globalAlpha = this.Data.Info.Opacity ;
-    Scene.context.globalAlpha = Opacity;
-    Scene.context.fillStyle = this.Data.Info.Colour;
-    Scene.context.moveTo(this.Data.Position.X - this.Data.Position.nw, this.Data.Position.Y);
-    Scene.context.lineTo(this.Data.Position.X, this.Data.Position.Y);
-
-    Scene.context.lineWidth = this.Data.Position.Height;
-    Scene.context.strokeStyle = this.Data.Info.Colour;
-    Scene.context.stroke();
-    Scene.context.globalAlpha = 1;
-
-    if (Opacity <= 0) {
-        this.kill(dt);
+        this.Data.lastRender = now;
     }
 
+    this.Elements.forEach(function (e) {
+        e.draw(dt);
+    });
 }
 
-Dash.prototype.kill = function(dt) {
-    for (var i = 0; i < Dashes.length; i++) {
-        var e = Dashes[i];
-
-        if (e === this) {
-            Dashes.splice(i, 1);
-            break;
-        }
-    }
-}
-
-var Dashes = new Array();
+var Dash = new DashController;
