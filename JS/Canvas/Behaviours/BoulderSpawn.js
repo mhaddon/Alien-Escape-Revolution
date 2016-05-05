@@ -30,7 +30,7 @@ var cBehaviour_BoulderSpawn = function (dt) {
             Entity.add(newBoulder);
 
             this.Data.BehaviourInfo.BoulderSpawnTimer = now;
-            if ((Math.random() > 0.65) || (Game.Data.Age < 10500)) {
+            if ((Math.random() > 0.7) || (Game.Data.Age < 8500)) {
                 this.Data.BehaviourInfo.BoulderSpawnTimerOffset = ((1400 * (1 - Game.getDifficultyModifier()) * (0.5 + 0.5 * Math.random()))).max(1400).min(105);
             } else {
                 this.Data.BehaviourInfo.BoulderSpawnTimerOffset = ((400 * (1 - Game.getDifficultyModifier()) * (0.5 + 0.5 * Math.random()))).max(1400).min(105);                
