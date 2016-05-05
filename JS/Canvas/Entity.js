@@ -1,5 +1,5 @@
 var EntityController = function () {
-    this.Elements = new Array();
+    this.constructor();
 
     this.Data = {
         lastCollissionCheck: 0,
@@ -19,39 +19,8 @@ var EntityController = function () {
     }
 }
 
-EntityController.prototype.killNonProtected = function () {
-    for (var i = 0; i < this.Elements.length; i++) {
-        var e = this.Elements[i];
-        if ((e.Data.AI.Protected === false) && (e.kill())) {
-            i--;
-        }
-    }
-}
-
-EntityController.prototype.add = function (EntityElement) {
-    this.Elements.push(EntityElement);
-}
-
-EntityController.prototype.find = function (name) {
-    for (var i = 0; i < this.Elements.length; i++) {
-        var e = this.Elements[i];
-        if (name === e.Data.Description) {
-            return e;
-        }
-    }
-    return false;
-}
-
-EntityController.prototype.removeElement = function (EntityElement) {
-    for (var i = 0; i < this.Elements.length; i++) {
-        var e = this.Elements[i];
-        if (EntityElement === e) {
-            this.Elements.splice(i, 1);
-            return true;
-        }
-    }
-    return false;
-}
+EntityController.prototype = Object.create(Controller.prototype);
+EntityController.prototype.constructor = Controller;
 
 EntityController.prototype.renderAll = function (dt) {
     this.Elements.forEach(function (e) {

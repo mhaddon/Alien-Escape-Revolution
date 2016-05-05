@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     loadJSON("Data/Audio.json", function (obj) {
         obj.forEach(function (e) {
-            Audio.add(new AudioElement(e.Data.Description, e));
+            gAudio.add(new AudioElement(e.Data.Description, e));
         });
     });
 

@@ -1,5 +1,5 @@
 var DashController = function () {
-    this.Elements = new Array();
+    this.constructor();
 
     this.Data = {
         lastRender: 0
@@ -15,24 +15,8 @@ var DashController = function () {
     }
 }
 
-DashController.prototype.add = function (DashElement) {
-    this.Elements.push(DashElement);
-}
-
-DashController.prototype.removeElement = function (DashElement) {
-    for (var i = 0; i < this.Elements.length; i++) {
-        var e = this.Elements[i];
-        if (DashElement === e) {
-            this.Elements.splice(i, 1);
-            return true;
-        }
-    }
-    return false;
-}
-
-DashController.prototype.killAll = function () {
-    this.Elements = new Array();
-}
+DashController.prototype = Object.create(Controller.prototype);
+DashController.prototype.constructor = Controller;
 
 DashController.prototype.renderAll = function (dt) {
     var now = Date.now();

@@ -1,6 +1,5 @@
 var ContainerController = function () {
-    this.Elements = new Array();
-    this.Data = {};
+    this.constructor();
 
     return {
         Elements: this.Elements,
@@ -17,25 +16,13 @@ var ContainerController = function () {
 
 }
 
-ContainerController.prototype.find = function (name) {
-    for (var i = 0; i < this.Elements.length; i++) {
-        var e = this.Elements[i];
-        if (name === e.Data.Description) {
-            return e;
-        }
-    }
-    return false;
-}
+ContainerController.prototype = Object.create(Controller.prototype);
+ContainerController.prototype.constructor = Controller;
 
 ContainerController.prototype.renderAll = function (dt) {
     this.Elements.forEach(function (e) {
         e.draw(dt);
     });
-}
-
-
-ContainerController.prototype.add = function (ContainerElement) {
-    this.Elements.push(ContainerElement);
 }
 
 ContainerController.prototype.registerKeyRelease = function (keyCode) {
