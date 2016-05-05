@@ -32,21 +32,197 @@ var SceneController = function () {
             Resize: 0
         },
         Info: {
-            selectedTextBox: null
+            selectedTextBox: null,
+            WebGL: false
         }
     }
-    
+
+    this.LoadedImages = new Array();
+
     return {
         Viewport: this.Viewport,
         Data: this.Data,
         canvas: this.canvas,
         context: this.context,
+        drawRect: this.drawRect,
+        drawLine: this.drawLine,
+        drawText: this.drawText,
+        drawImage: this.drawImage,
+        drawImageRound: this.drawImageRound,
+        LoadedImages: this.LoadedImages,
+        getTextSize: this.getTextSize,
         currentFrustrum: this.currentFrustrum,
         delayedResize: this.delayedResize,
         getOffset: this.getOffset,
         onResize: this.onResize,
         sync: this.sync,
         updateViewport: this.updateViewport
+    }
+}
+
+SceneController.prototype.drawImageRound = function (X, Y, Width, Height, ImageURL, Opacity) {
+    /**
+     * First we need to find out if we have already loaded this image on this page before
+     * we Base64 the URL of the image to create a uniform naming system with basic characters
+     */
+    var ImageName = window.btoa(ImageURL);
+    if (typeof this.LoadedImages[ImageName] === 'undefined') {
+        /**
+         * If the Image has not been loaded, then we need to spend our time loading it in the background
+         */
+        this.LoadedImages[ImageName] = new Image();
+        this.LoadedImages[ImageName].src = ImageURL;
+    } else if (this.LoadedImages[ImageName].complete) {
+        if (this.Data.Info.WebGL) {
+
+        } else {
+            var Size = (Width + Height) / 2;
+
+            this.context.globalAlpha = Opacity;
+            this.context.save();
+            this.context.beginPath();
+            this.context.arc(X + (Size / 2), Y + (Size / 2), Size / 2, 0, Math.PI * 2, true);
+            this.context.fillStyle = "black";
+            this.context.fill();
+            this.context.closePath();
+            this.context.clip();
+
+
+            this.context.drawImage(this.LoadedImages[ImageName], X, Y, Size, Size);
+
+            this.context.beginPath();
+            this.context.arc(X, Y, Size / 2, 0, Math.PI * 2, true);
+            this.context.clip();
+            this.context.closePath();
+
+
+            this.context.restore();
+        }
+    }
+}
+
+SceneController.prototype.drawImage = function (X, Y, Width, Height, ImageURL, Opacity) {
+    /**
+     * First we need to find out if we have already loaded this image on this page before
+     * we Base64 the URL of the image to create a uniform naming system with basic characters
+     */
+    var ImageName = window.btoa(ImageURL);
+    if (typeof this.LoadedImages[ImageName] === 'undefined') {
+        /**
+         * If the Image has not been loaded, then we need to spend our time loading it in the background
+         */
+        this.LoadedImages[ImageName] = new Image();
+        this.LoadedImages[ImageName].src = ImageURL;
+    } else if (this.LoadedImages[ImageName].complete) {
+        if (this.Data.Info.WebGL) {
+
+        } else {
+            this.context.globalAlpha = Opacity;
+            this.context.drawImage(this.LoadedImages[ImageName], X, Y, Width, Height);
+            this.context.globalAlpha = 1;
+        }
+    }
+}
+
+SceneController.prototype.drawLine = function (X, Y, TargetX, TargetY, LineInfo) {
+    var Line = {
+        Colour: LineInfo,
+        Opacity: 1,
+        Width: 1
+    }
+    if ((typeof LineInfo === "object") && (LineInfo !== null)) {
+        Line.Colour = LineInfo.Colour || "black";
+        Line.Opacity = (!isNaN(LineInfo.Opacity)) ? LineInfo.Opacity : 1;
+        Line.Width = LineInfo.Width || 1;
+    }
+
+    if (this.Data.Info.WebGL) {
+
+    } else {
+        this.context.beginPath();
+
+        this.context.globalAlpha = Line.Opacity;
+        this.context.fillStyle = Line.Colour;
+        this.context.moveTo(X, Y);
+        this.context.lineTo(TargetX, TargetY);
+
+        this.context.lineWidth = Line.Width;
+        this.context.strokeStyle = Line.Colour;
+        this.context.stroke();
+        this.context.globalAlpha = 1;
+    }
+}
+
+SceneController.prototype.drawRect = function (X, Y, Width, Height, FillInfo, OutlineInfo) {
+    var Fill = {
+        Colour: FillInfo,
+        Opacity: 1
+    }
+    var Outline = {
+        Colour: OutlineInfo,
+        Opacity: 1
+    }
+    if ((typeof FillInfo === "object") && (FillInfo !== null)) {
+        Fill.Colour = FillInfo.Colour || "black";
+        Fill.Opacity = FillInfo.Opacity || 1;
+    }
+    if ((typeof OutlineInfo === "object") && (OutlineInfo !== null)) {
+        Outline.Colour = OutlineInfo.Colour || "black";
+        Outline.Opacity = OutlineInfo.Opacity || 1;
+    }
+
+    if (this.Data.Info.WebGL) {
+
+    } else {
+        this.context.beginPath();
+        this.context.rect(X, Y, Width, Height);
+
+        if (Fill.Colour !== null) {
+            this.context.globalAlpha = Fill.Opacity;
+            this.context.fillStyle = Fill.Colour;
+            this.context.fill();
+            this.context.globalAlpha = 1;
+        }
+
+        if (Outline.Colour !== null) {
+            this.context.globalAlpha = Outline.Opacity;
+            this.context.strokeStyle = Outline.Colour;
+            this.context.stroke();
+            this.context.globalAlpha = 1;
+        }
+
+        this.context.closePath();
+    }
+}
+
+SceneController.prototype.getTextSize = function (Text, Font) {
+    this.context.font = Font;
+
+    return this.context.measureText(Text).width;
+}
+
+SceneController.prototype.drawText = function (X, Y, Text, FontInfo) {
+    var Font = {
+        Font: FontInfo,
+        Colour: "white",
+        Opacity: 1,
+        Align: "left"
+    }
+    if ((typeof FontInfo === "object") && (FontInfo !== null)) {
+        Font.Font = FontInfo.Font || 1;
+        Font.Align = FontInfo.Align || "left";
+        Font.Colour = FontInfo.Colour || "white";
+        Font.Opacity = FontInfo.Opacity || 1;
+    }
+
+    if (this.Data.Info.WebGL) {
+
+    } else {
+        this.context.globalAlpha = Font.Opacity;
+        this.context.font = Font.Font;
+        this.context.textAlign = Font.Align;
+        this.context.fillStyle = Font.Colour;
+        this.context.fillText(Text, X, Y);
     }
 }
 
@@ -65,7 +241,7 @@ SceneController.prototype.sync = function () {
  * The purpose of this function is to retrieve the current page offset,
  * this is incase we embed the canvas inside a div or another html element.
  *
- * @returns {Scene.getOffset.SceneAnonym$0}
+ * @returns {this.getOffset.SceneAnonym$0}
  */
 SceneController.prototype.getOffset = function () {
     var rect = this.canvas.getBoundingClientRect();
@@ -163,8 +339,8 @@ SceneController.prototype.updateViewport = function () {
         this.Viewport.Width = this.Viewport.Height * 2.4;
     }
 
-    Scene.context.canvas.width = this.Viewport.Width;
-    Scene.context.canvas.height = this.Viewport.Height;
+    this.context.canvas.width = this.Viewport.Width;
+    this.context.canvas.height = this.Viewport.Height;
 
 }
 

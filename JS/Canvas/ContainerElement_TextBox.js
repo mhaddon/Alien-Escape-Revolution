@@ -179,9 +179,10 @@ ContainerElement_TextBox.prototype.wrapText = function () {
             Text[i] = Text[i].trim();
             var e = Text[i];
             
-            Scene.context.font = this.Data.Text.Size + "px " + this.Data.Text.Font;
-            if (Scene.context.measureText(e).width > Coords.Width) {
-                var splitCharacter = Math.floor(e.length * (Coords.Width / Scene.context.measureText(e).width));
+            var textSize = Scene.getTextSize(e, this.Data.Text.Size + "px " + this.Data.Text.Font);
+            
+            if (textSize > Coords.Width) {
+                var splitCharacter = Math.floor(e.length * (Coords.Width / textSize));
 
                 var ClosestSpace = this.getClosestSpace(e, splitCharacter);
                 if (splitCharacter - ClosestSpace < this.Data.WrapText.SpaceDistance) {
@@ -195,7 +196,7 @@ ContainerElement_TextBox.prototype.wrapText = function () {
             }
             Text[i] = Text[i].trim();
         }
-        
+
         this.Data.WrapText.Value = Text;
 
         this.Data.WrapText.UnwrappedText = this.Data.Text.Value;
@@ -270,23 +271,18 @@ ContainerElement_TextBox.prototype.drawText = function (X, Y, dt) {
                 Y: Y + (i * (this.Data.Text.Size + this.Data.Text.LineGap))
             };
 
-            Scene.context.font = this.Data.Text.Size + "px " + this.Data.Text.Font;
-            Scene.context.globalAlpha = this.Data.Text.Opacity;
-            
             if (this.Data.Text.Center) {
                 Text.X += (Coords.Width / 2);
                 Text.Y += (Coords.Height / 2) + (this.Data.Text.Size / 4);
             } else {
                 Text.Y += this.Data.Text.Padding + this.Data.Text.PaddingTop;
             }
-            
+
             if (this.Data.Text.Align === 'right') {
                 Text.X += (Coords.Width) - this.Data.Text.Padding + this.Data.Text.PaddingRight;
             } else if (this.Data.Text.Align === 'left') {
                 Text.X = X + this.Data.Text.Padding + this.Data.Text.PaddingLeft;
             }
-            
-            Scene.context.textAlign = this.Data.Text.Align;
 
             if (this.Data.TextBox.On) {
                 Text.Value += this.Data.TextBox.Value;
@@ -299,9 +295,14 @@ ContainerElement_TextBox.prototype.drawText = function (X, Y, dt) {
                 Text.Value = Text.Value.split("").join(String.fromCharCode(8202));
             }
 
-            Scene.context.fillStyle = (this.Data.Status.Pressed) ? this.Data.Text.Pressed : this.Data.Text.Colour;
-            Scene.context.fillText(Text.Value, Text.X, Text.Y);
-            Scene.context.globalAlpha = 1;
+
+            Scene.drawText(Text.X, Text.Y, Text.Value,
+                    ({
+                        Opacity: this.Data.Text.Opacity,
+                        Align: this.Data.Text.Align,
+                        Colour: (this.Data.Status.Pressed) ? this.Data.Text.Pressed : this.Data.Text.Colour,
+                        Font: this.Data.Text.Size + "px " + this.Data.Text.Font
+                    }));
         }
     }
 }

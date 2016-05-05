@@ -108,29 +108,9 @@ ContainerElement_PictureBox.prototype.drawPicture = function (X, Y, dt, ImageURL
          * or to just draw it normally...
          */
         if (this.Data.Image.Circle) {
-            var Size = (this.Data.Position.Width + this.Data.Position.Height) / 2;
-
-            Scene.context.globalAlpha = Opacity;
-            Scene.context.save();
-            Scene.context.beginPath();
-            Scene.context.arc(X + (Size / 2), Y + (Size / 2), Size / 2, 0, Math.PI * 2, true);
-            Scene.context.fillStyle = "black";
-            Scene.context.fill();
-            Scene.context.closePath();
-            Scene.context.clip();
-
-
-            Scene.context.drawImage(LoadedImages[ImageName], X, Y, Size, Size);
-
-            Scene.context.beginPath();
-            Scene.context.arc(X, Y, Size / 2, 0, Math.PI * 2, true);
-            Scene.context.clip();
-            Scene.context.closePath();
-
-
-            Scene.context.restore();
+            Scene.drawImageRound(X, Y, this.Data.Position.Width, this.Data.Position.Height, ImageURL, Opacity);
         } else {
-            Scene.context.drawImage(LoadedImages[ImageName], X, Y, this.Data.Position.Width, this.Data.Position.Height);
+            Scene.drawImage(X, Y, this.Data.Position.Width, this.Data.Position.Height, ImageURL, Opacity);
         }
     }
 }

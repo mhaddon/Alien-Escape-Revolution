@@ -62,9 +62,7 @@ function loadHighscores(obj) {
     obj.sort(compareScore);
 
     var HighscoresList = [];
-
-    Scene.context.font = textHighscoresList.Data.Text.Size + "px " + textHighscoresList.Data.Text.Font;
-
+    
     for (var i = 0; i < obj.length; i++) {
         var e = obj[i];
         
@@ -75,10 +73,12 @@ function loadHighscores(obj) {
             " (" + e.Score + ")"
         ]
         
-        var width = Scene.context.measureText(TextParts.join('')).width;
+        var font = textHighscoresList.Data.Text.Size + "px " + textHighscoresList.Data.Text.Font;
+        
+        var width = Scene.getTextSize(TextParts.join(''), font);
         var maxWidth = textHighscoresList.Data.Position.Width;
         
-        var spaceAM = Math.floor((maxWidth - width) / Scene.context.measureText(' ').width);
+        var spaceAM = Math.floor((maxWidth - width) / Scene.getTextSize(' ', font));
         
 
         for (var n = 0; n < spaceAM; n++) {

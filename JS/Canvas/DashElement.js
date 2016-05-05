@@ -60,10 +60,7 @@ DashElement.prototype.loadObject = function (settings) {
 }
 
 DashElement.prototype.draw = function (dt) {
-    Scene.context.beginPath();
-
     var moveSpeed = (dt * 0.65) * (1 - Game.getDifficultyModifier());
-
 
     this.Data.Position.nw += moveSpeed;
     this.Data.Position.nw = this.Data.Position.nw.max(500);
@@ -72,23 +69,20 @@ DashElement.prototype.draw = function (dt) {
     var Opacity = (1 - (this.Data.Position.nw / 500)) * 0.55;
 
 
-    //Scene.context.globalAlpha = this.Data.Info.Opacity ;
-    Scene.context.globalAlpha = Opacity;
-    Scene.context.fillStyle = this.Data.Info.Colour;
-    Scene.context.moveTo(this.Data.Position.X - this.Data.Position.nw, this.Data.Position.Y);
-    Scene.context.lineTo(this.Data.Position.X, this.Data.Position.Y);
-
-    Scene.context.lineWidth = this.Data.Position.Height;
-    Scene.context.strokeStyle = this.Data.Info.Colour;
-    Scene.context.stroke();
-    Scene.context.globalAlpha = 1;
+    Scene.drawLine(this.Data.Position.X - this.Data.Position.nw, this.Data.Position.Y, this.Data.Position.X, this.Data.Position.Y,
+            ({
+                Opacity: Opacity,
+                Colour: this.Data.Info.Colour,
+                Width: this.Data.Position.Height
+            }));
 
     if (Opacity <= 0) {
         this.kill(dt);
     }
 
+
 }
 
-DashElement.prototype.kill = function(dt) {
+DashElement.prototype.kill = function (dt) {
     Dash.removeElement(this);
 }

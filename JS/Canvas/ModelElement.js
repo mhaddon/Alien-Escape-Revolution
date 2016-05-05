@@ -42,10 +42,11 @@ ModelElement.prototype.draw = function (X, Y, FrameID) {
         for (var frameX = 0; frameX < this.Data.Frames[FrameID][frameY].length; frameX++) {
             var e = this.Data.Frames[FrameID][frameY][frameX];
             if (e !== null) {
-                Scene.context.beginPath();
-                Scene.context.fillStyle = e;
-                Scene.context.rect(X + (frameX * this.Data.Tile_Size), Y + (frameY * this.Data.Tile_Size), this.Data.Tile_Size, this.Data.Tile_Size);
-                Scene.context.fill();
+                Scene.drawRect(X + (frameX * this.Data.Tile_Size), Y + (frameY * this.Data.Tile_Size), this.Data.Tile_Size, this.Data.Tile_Size,
+                        ({
+                            Opacity: 1,
+                            Colour: e
+                        }), null);
             }
         }
     }

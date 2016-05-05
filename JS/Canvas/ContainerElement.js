@@ -1030,30 +1030,16 @@ ContainerElement.prototype.getCoords = function () {
  */
 ContainerElement.prototype.drawBackground = function (X, Y, dt) {
     if ((this.Data.Fill.On) || (this.Data.Outline.On)) {
-        Scene.context.beginPath();
-        Scene.context.rect(X, Y, this.Data.Position.Width, this.Data.Position.Height);
 
-        /**
-         * If the ContainerElement has a background colour
-         */
-        if ((this.Data.Fill.On) && (this.Data.Fill.Colour !== null)) {
-            Scene.context.globalAlpha = this.Data.Fill.Opacity;
-            Scene.context.fillStyle = (this.Data.Status.Pressed) ? this.Data.Fill.Pressed : (this.Data.Status.Hovered && this.Data.Hover.On) ? this.Data.Hover.Colour : this.Data.Fill.Colour;
-            Scene.context.fill();
-            Scene.context.globalAlpha = 1;
-        }
-
-        /**
-         * If the ContainerElement has an outline
-         */
-        if (this.Data.Outline.On) {
-            Scene.context.globalAlpha = this.Data.Outline.Opacity;
-            Scene.context.strokeStyle = (this.Data.Status.Pressed) ? this.Data.Outline.Pressed : this.Data.Outline.Colour;
-            Scene.context.stroke();
-            Scene.context.globalAlpha = 1;
-        }
-
-        Scene.context.closePath();
+        Scene.drawRect(X, Y, this.Data.Position.Width, this.Data.Position.Height,
+                ((this.Data.Fill.On) ? {
+                    Opacity: this.Data.Fill.Opacity,
+                    Colour: (this.Data.Status.Pressed) ? this.Data.Fill.Pressed : (this.Data.Status.Hovered && this.Data.Hover.On) ? this.Data.Hover.Colour : this.Data.Fill.Colour
+                } : null),
+                ((this.Data.Outline.On) ? {
+                    Opacity: this.Data.Outline.Opacity,
+                    Colour: (this.Data.Status.Pressed) ? this.Data.Outline.Pressed : this.Data.Outline.Colour
+                } : null));
     }
 }
 

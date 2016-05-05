@@ -96,11 +96,13 @@ function showFPS(dt) {
      * so we only show it when the user pressed the D key.
      */
     if (Key.isKeyPressed(KeyCode.F, false)) {
-        Scene.context.globalAlpha = 1;
-        Scene.context.font = "16px Georgia";
-        Scene.context.textAlign = 'left';
-        Scene.context.fillStyle = "white";
-        Scene.context.fillText("FPS: " + Math.round(total / FPS.length), 25, 25);
+        Scene.drawText(25, 25, "FPS: " + Math.round(total / FPS.length),
+                ({
+                    Opacity: 1,
+                    Align: "left",
+                    Colour: "white",
+                    Font: "16px Georgia"
+                }));
     }
 }
 
