@@ -90,28 +90,12 @@ ContainerElement_PictureBox.prototype.constructor = ContainerElement;
  */
 ContainerElement_PictureBox.prototype.drawPicture = function (X, Y, dt, ImageURL, Opacity) {
     /**
-     * First we need to find out if we have already loaded this image on this page before
-     * we Base64 the URL of the image to create a uniform naming system with basic characters
+     * If the image has not been loaded yet, then nothing will appear.
      */
-    var ImageName = window.btoa(ImageURL);
-    if (typeof LoadedImages[ImageName] === 'undefined') {
-        /**
-         * If the Image has not been loaded, then we need to spend our time loading it in the background
-         */
-        LoadedImages[ImageName] = new Image();
-        LoadedImages[ImageName].src = ImageURL;
-    } else if (LoadedImages[ImageName].complete) {
-        /**
-         * Now the image has been fully loaded we need to render it.
-         * 
-         * The two options is to dynamically crop the edges and to force it into a circle
-         * or to just draw it normally...
-         */
-        if (this.Data.Image.Circle) {
-            Scene.drawImageRound(X, Y, this.Data.Position.Width, this.Data.Position.Height, ImageURL, Opacity);
-        } else {
-            Scene.drawImage(X, Y, this.Data.Position.Width, this.Data.Position.Height, ImageURL, Opacity);
-        }
+    if (this.Data.Image.Circle) {
+        Scene.drawImageRound(X, Y, this.Data.Position.Width, this.Data.Position.Height, ImageURL, Opacity);
+    } else {
+        Scene.drawImage(X, Y, this.Data.Position.Width, this.Data.Position.Height, ImageURL, Opacity);
     }
 }
 
@@ -162,7 +146,7 @@ ContainerElement_PictureBox.prototype.drawPictures = function (X, Y, dt) {
              * We want to make sure that the next image is actually a different image
              */
             if (this.Data.Image.NextID !== this.Data.Image.CurrentID) {
-                
+
                 /**
                  * Now we want to draw this new image in accordance to how much it has already
                  * faded in.
@@ -198,10 +182,10 @@ ContainerElement_PictureBox.prototype.drawPictures = function (X, Y, dt) {
  */
 ContainerElement_PictureBox.prototype.isHovered = function (_Mouse) {
     var Coords = this.getCoords();
-    
+
     var returnVar = false;
-    
-    
+
+
     if (this.Data.Image.Circle) {
         var Size = (this.Data.Position.Width + this.Data.Position.Height) / 2;
 
@@ -212,6 +196,6 @@ ContainerElement_PictureBox.prototype.isHovered = function (_Mouse) {
                 (_Mouse.Y < Coords.Y + Coords.Height) &&
                 (_Mouse.Y > Coords.Y)));
     }
-    
+
     return returnVar;
 }

@@ -49,6 +49,7 @@ var SceneController = function () {
         drawText: this.drawText,
         drawImage: this.drawImage,
         drawImageRound: this.drawImageRound,
+        isImageLoaded: this.isImageLoaded,
         LoadedImages: this.LoadedImages,
         getTextSize: this.getTextSize,
         currentFrustrum: this.currentFrustrum,
@@ -65,14 +66,7 @@ SceneController.prototype.drawImageRound = function (X, Y, Width, Height, ImageU
      * First we need to find out if we have already loaded this image on this page before
      * we Base64 the URL of the image to create a uniform naming system with basic characters
      */
-    var ImageName = window.btoa(ImageURL);
-    if (typeof this.LoadedImages[ImageName] === 'undefined') {
-        /**
-         * If the Image has not been loaded, then we need to spend our time loading it in the background
-         */
-        this.LoadedImages[ImageName] = new Image();
-        this.LoadedImages[ImageName].src = ImageURL;
-    } else if (this.LoadedImages[ImageName].complete) {
+    if (this.isImageLoaded(ImageURL)) {
         if (this.Data.Info.WebGL) {
 
         } else {
@@ -106,14 +100,7 @@ SceneController.prototype.drawImage = function (X, Y, Width, Height, ImageURL, O
      * First we need to find out if we have already loaded this image on this page before
      * we Base64 the URL of the image to create a uniform naming system with basic characters
      */
-    var ImageName = window.btoa(ImageURL);
-    if (typeof this.LoadedImages[ImageName] === 'undefined') {
-        /**
-         * If the Image has not been loaded, then we need to spend our time loading it in the background
-         */
-        this.LoadedImages[ImageName] = new Image();
-        this.LoadedImages[ImageName].src = ImageURL;
-    } else if (this.LoadedImages[ImageName].complete) {
+    if (this.isImageLoaded(ImageURL)) {
         if (this.Data.Info.WebGL) {
 
         } else {
@@ -122,6 +109,22 @@ SceneController.prototype.drawImage = function (X, Y, Width, Height, ImageURL, O
             this.context.globalAlpha = 1;
         }
     }
+
+
+}
+
+SceneController.prototype.isImageLoaded = function (ImageURL) {
+    var ImageName = window.btoa(ImageURL);
+    if (typeof this.LoadedImages[ImageName] === 'undefined') {
+        /**
+         * If the Image has not been loaded, then we need to spend our time loading it in the background
+         */
+        this.LoadedImages[ImageName] = new Image();
+        this.LoadedImages[ImageName].src = ImageURL;
+    } else if (this.LoadedImages[ImageName].complete) {
+        return true;
+    }
+    return false;
 }
 
 SceneController.prototype.drawLine = function (X, Y, TargetX, TargetY, LineInfo) {
