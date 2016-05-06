@@ -3,8 +3,6 @@
  *
  */
 var SceneController = function () {
-    this.canvas = document.getElementById("scene");
-    this.context = this.canvas.getContext("2d");
 
     /**
      * The viewport is the current region of the canvas that the site occupies
@@ -34,8 +32,20 @@ var SceneController = function () {
         Info: {
             selectedTextBox: null,
             WebGL: false
+        },
+        WebGL: {
+            On: false,
+            squareVerticesBuffer: null,
+            mvMatrix: null,
+            shaderProgram: null,
+            vertexPositionAttribute: null,
+            perspectiveMatrix: null
         }
     }
+    
+    
+    this.canvas = document.getElementById("scene");
+    this.context = this.canvas.getContext("2d");
 
     this.LoadedImages = new Array();
 
@@ -67,7 +77,7 @@ SceneController.prototype.drawImageRound = function (X, Y, Width, Height, ImageU
      * we Base64 the URL of the image to create a uniform naming system with basic characters
      */
     if (this.isImageLoaded(ImageURL)) {
-        if (this.Data.Info.WebGL) {
+        if (this.Data.WebGL.On) {
 
         } else {
             var Size = (Width + Height) / 2;
@@ -101,7 +111,7 @@ SceneController.prototype.drawImage = function (X, Y, Width, Height, ImageURL, O
      * we Base64 the URL of the image to create a uniform naming system with basic characters
      */
     if (this.isImageLoaded(ImageURL)) {
-        if (this.Data.Info.WebGL) {
+        if (this.Data.WebGL.On) {
 
         } else {
             this.context.globalAlpha = Opacity;
@@ -139,7 +149,7 @@ SceneController.prototype.drawLine = function (X, Y, TargetX, TargetY, LineInfo)
         Line.Width = LineInfo.Width || 1;
     }
 
-    if (this.Data.Info.WebGL) {
+    if (this.Data.WebGL.On) {
 
     } else {
         this.context.beginPath();
@@ -174,7 +184,7 @@ SceneController.prototype.drawRect = function (X, Y, Width, Height, FillInfo, Ou
         Outline.Opacity = OutlineInfo.Opacity || 1;
     }
 
-    if (this.Data.Info.WebGL) {
+    if (this.Data.WebGL.On) {
 
     } else {
         this.context.beginPath();
@@ -218,7 +228,7 @@ SceneController.prototype.drawText = function (X, Y, Text, FontInfo) {
         Font.Opacity = FontInfo.Opacity || 1;
     }
 
-    if (this.Data.Info.WebGL) {
+    if (this.Data.WebGL.On) {
 
     } else {
         this.context.globalAlpha = Font.Opacity;
@@ -235,7 +245,11 @@ SceneController.prototype.drawText = function (X, Y, Text, FontInfo) {
  * @returns {undefined}
  */
 SceneController.prototype.sync = function () {
-    this.context.clearRect(0, 0, this.Viewport.Width, this.Viewport.Height);
+    if (this.Data.WebGL.On) {
+
+    } else {
+        this.context.clearRect(0, 0, this.Viewport.Width, this.Viewport.Height);
+    }
 }
 
 
