@@ -1,13 +1,4 @@
 /**
- * This array holds all the loaded Images in one place
- * An image is stored into this array according to the base64 version of its URL
- * If you do LoadedImages.length, it will return 0, even if its fulled of Images
- * 
- * @type Array
- */
-var LoadedImages = [];
-
-/**
  * This function is a child of ContainerElement, it handles the loading and rendering of
  * images.
  * It can also work as a slideshow for multiple images.

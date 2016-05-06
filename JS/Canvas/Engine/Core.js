@@ -15,11 +15,6 @@ var requestAnimFrame = (function () {
 })();
 
 
-var lastTime = 0;
-
-var FPS = [];
-
-
 /**
  * This is the program loop, but it isnt named that as i want to split the loop up
  * into the various parts
@@ -28,7 +23,7 @@ var FPS = [];
  */
 function main() {
     var now = Date.now();
-    var dt = now - lastTime; //Time since last loop
+    var dt = now - Scene.Data.Timers.lastGameLoop; //Time since last loop
 
     /**
      * If the time between since last loop is so great, then the jump it could cause
@@ -36,11 +31,10 @@ function main() {
      * can handle the stress of... whatever they are dealing with
      */
     if (dt < 1000) {
-        Scene.sync();
+        Scene.sync(dt);
 
         Scene.Data.CacheID.Positional = now;
         Container.renderAll(dt);
-        showFPS(dt);
 
         if (!Game.Data.inMenu) {
             Entity.checkCollisions(dt);
@@ -50,60 +44,12 @@ function main() {
         }
     }
 
-    lastTime = now;
+    Scene.Data.Timers.lastGameLoop = now;
 
     /**
      * rerun the function when the computer can render the animation frame
      */
     requestAnimFrame(main);
-}
-
-/**
- * This function will display the users current FPS in the top left corner if
- * the key D is currently being pressed.
- *
- * This is for debugging performance.
- *
- * @param {Number} dt
- * @returns {undefined}
- */
-function showFPS(dt) {
-    /**
-     * First we need to record the current FPS  in order to average out
-     * all the recent records
-     *
-     * The reason why it needs to be averaged is that it fluctuates too much to
-     * even be read.
-     *
-     * This code will attempt to average it to whatever the last second was.
-     * So the more frames the user has, the more frames it will reference when
-     * averaging.
-     */
-    FPS.push(Math.round(1000 / dt));
-
-    var total = 0;
-
-    FPS.forEach(function (e) {
-        total += e;
-    });
-
-    if (FPS.length > Math.round(1000 / dt)) { //the seconds average... about
-        FPS.shift();
-    }
-
-    /**
-     * Now we dont want to show this information all the time,
-     * so we only show it when the user pressed the D key.
-     */
-    if (Key.isKeyPressed(KeyCode.F, false)) {
-        Scene.drawText(25, 25, "FPS: " + Math.round(total / FPS.length),
-                ({
-                    Opacity: 1,
-                    Align: "left",
-                    Colour: "white",
-                    Font: "16px Georgia"
-                }));
-    }
 }
 
 /**

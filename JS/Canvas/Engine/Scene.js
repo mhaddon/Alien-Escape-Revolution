@@ -23,7 +23,8 @@ var SceneController = function () {
 
     this.Data = {
         Timers: {
-            delayedResize: 0
+            delayedResize: 0,
+            lastGameLoop: 0
         },
         CacheID: {
             Positional: 0,
@@ -40,13 +41,21 @@ var SceneController = function () {
             shaderProgram: null,
             vertexPositionAttribute: null,
             perspectiveMatrix: null
-        }
+        },
+        FPS: []
     }
-    
-    
+
+
     this.canvas = document.getElementById("scene");
     this.context = this.canvas.getContext("2d");
 
+    /**
+     * This array holds all the loaded Images in one place
+     * An image is stored into this array according to the base64 version of its URL
+     * If you do LoadedImages.length, it will return 0, even if its fulled of Images
+     * 
+     * @type Array
+     */
     this.LoadedImages = new Array();
 
     return {
@@ -54,6 +63,8 @@ var SceneController = function () {
         Data: this.Data,
         canvas: this.canvas,
         context: this.context,
+        getFPS: this.getFPS,
+        recordFPS: this.recordFPS,
         drawRect: this.drawRect,
         drawLine: this.drawLine,
         drawText: this.drawText,
@@ -77,7 +88,7 @@ SceneController.prototype.drawImageRound = function (X, Y, Width, Height, ImageU
      * we Base64 the URL of the image to create a uniform naming system with basic characters
      */
     var loadedImage = this.isImageLoaded(ImageURL);
-    
+
     if (loadedImage) {
         if (this.Data.WebGL.On) {
 
@@ -112,9 +123,9 @@ SceneController.prototype.drawImage = function (X, Y, Width, Height, ImageURL, O
      * First we need to find out if we have already loaded this image on this page before
      * we Base64 the URL of the image to create a uniform naming system with basic characters
      */
-    
+
     var loadedImage = this.isImageLoaded(ImageURL);
-    
+
     if (loadedImage) {
         if (this.Data.WebGL.On) {
 
@@ -244,12 +255,42 @@ SceneController.prototype.drawText = function (X, Y, Text, FontInfo) {
     }
 }
 
+SceneController.prototype.getFPS = function() {
+    var total = 0;
+
+    this.Data.FPS.forEach(function (e) {
+        total += e;
+    });
+    return Math.round(total / this.Data.FPS.length);
+}
+
+SceneController.prototype.recordFPS = function (dt) {
+    /**
+     * First we need to record the current FPS  in order to average out
+     * all the recent records
+     *
+     * The reason why it needs to be averaged is that it fluctuates too much to
+     * even be read.
+     *
+     * This code will attempt to average it to whatever the last second was.
+     * So the more frames the user has, the more frames it will reference when
+     * averaging.
+     */
+    this.Data.FPS.push(Math.round(1000 / dt));
+
+    if (this.Data.FPS.length > Math.round(1000 / dt)) { //the seconds average... about
+        this.Data.FPS.shift();
+    }
+}
+
 /**
  * On each loop this clears the canvas so we can redraw everything.
  * This is why the draw function should do as little processing as possible
  * @returns {undefined}
  */
-SceneController.prototype.sync = function () {
+SceneController.prototype.sync = function (dt) {
+    this.recordFPS(dt);
+
     if (this.Data.WebGL.On) {
 
     } else {

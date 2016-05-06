@@ -30,28 +30,6 @@
         <!-- Detect old browsers -->
         <script type='text/javascript' src='JS/old_browser_detect.js'></script>
         
-        <!-- This file contains a list of all the possible keyboard KeyCodes that javascript can record -->
-        <script type='text/javascript' src='JS/Canvas/KeyCodes.js'></script>
-        
-        <script type='text/javascript' src='JS/Canvas/Controller.js'></script>
-        
-        <!-- This file controls and handles the Scene. The Scene manages the canvas, and where on the canvas we will draw -->
-        <script type='text/javascript' src='JS/Canvas/Scene.js'></script>        
-        
-        <script type='text/javascript' src='JS/Canvas/Game.js'></script>
-        
-        <!-- This file manages mouse events, and record the mouse information -->
-        <script type='text/javascript' src='JS/Canvas/Mouse.js'></script>
-        
-        <!-- Any misc init stuff goes here. Like polyfills. -->
-        <script type='text/javascript' src='JS/Canvas/Init.js'></script>
-        
-        <!-- This file holds all the various functions that the user can call on an event callback (for example, open a new tab) -->
-        <script type='text/javascript' src='JS/Canvas/Functions.js'></script>
-        
-        <!-- This file controls the keyboard events and records information like what keys are currently being pressed -->
-        <script type='text/javascript' src='JS/Canvas/Key.js'></script>
-        
         
         <script type='text/javascript' src='JS/Canvas/Behaviours/BoulderMove.js'></script>
         <script type='text/javascript' src='JS/Canvas/Behaviours/BoulderSpawn.js'></script>
@@ -64,31 +42,55 @@
         <script type='text/javascript' src='JS/Canvas/Events/Explode.js'></script>
         <script type='text/javascript' src='JS/Canvas/Events/GainScore.js'></script>
         
-        <script type='text/javascript' src='JS/Canvas/AudioElement.js'></script>
-        <script type='text/javascript' src='JS/Canvas/Audio.js'></script>
-        <script type='text/javascript' src='JS/Canvas/DashElement.js'></script>
-        <script type='text/javascript' src='JS/Canvas/Dash.js'></script>
-        <script type='text/javascript' src='JS/Canvas/ModelElement.js'></script>
-        <script type='text/javascript' src='JS/Canvas/Model.js'></script>
-        <script type='text/javascript' src='JS/Canvas/EntityElement.js'></script>
-        <script type='text/javascript' src='JS/Canvas/Entity.js'></script>
-        <script type='text/javascript' src='JS/Canvas/MainLoop.js'></script>
+        
+        
+        <!-- This file contains a list of all the possible keyboard KeyCodes that javascript can record -->
+        <script type='text/javascript' src='JS/Canvas/Engine/KeyCodes.js'></script>
+        
+        <script type='text/javascript' src='JS/Canvas/Engine/Controller.js'></script>
+        
+        <!-- This file controls and handles the Scene. The Scene manages the canvas, and where on the canvas we will draw -->
+        <script type='text/javascript' src='JS/Canvas/Engine/Scene.js'></script>        
+        
+        <script type='text/javascript' src='JS/Canvas/Engine/Game.js'></script>
+        
+        <!-- This file manages mouse events, and record the mouse information -->
+        <script type='text/javascript' src='JS/Canvas/Engine/Mouse.js'></script>
+        
+        <!-- Any misc init stuff goes here. Like polyfills. -->
+        <script type='text/javascript' src='JS/Canvas/Engine/Init.js'></script>
+        
+        <!-- This file holds all the various functions that the user can call on an event callback (for example, open a new tab) -->
+        <script type='text/javascript' src='JS/Canvas/Engine/Functions.js'></script>
+        
+        <!-- This file controls the keyboard events and records information like what keys are currently being pressed -->
+        <script type='text/javascript' src='JS/Canvas/Engine/Key.js'></script>
+        
+        <script type='text/javascript' src='JS/Canvas/Engine/AudioElement.js'></script>
+        <script type='text/javascript' src='JS/Canvas/Engine/Audio.js'></script>
+        <script type='text/javascript' src='JS/Canvas/Engine/DashElement.js'></script>
+        <script type='text/javascript' src='JS/Canvas/Engine/Dash.js'></script>
+        <script type='text/javascript' src='JS/Canvas/Engine/ModelElement.js'></script>
+        <script type='text/javascript' src='JS/Canvas/Engine/Model.js'></script>
+        <script type='text/javascript' src='JS/Canvas/Engine/EntityElement.js'></script>
+        <script type='text/javascript' src='JS/Canvas/Engine/Entity.js'></script>
         
         <!-- This file contains the baseclass for all the drawn elements. Too much to describe shortly. -->
-        <script type='text/javascript' src='JS/Canvas/ContainerElement.js'></script>
-        <script type='text/javascript' src='JS/Canvas/Container.js'></script>
+        <script type='text/javascript' src='JS/Canvas/Engine/ContainerElement.js'></script>
+        <script type='text/javascript' src='JS/Canvas/Engine/Container.js'></script>
         
         <!-- This file contains ContainerElement_TextBox which is a child of Container. ContainerElement_TextBox handles the drawing of text elements. -->
-        <script type='text/javascript' src='JS/Canvas/ContainerElement_TextBox.js'></script>
+        <script type='text/javascript' src='JS/Canvas/Engine/ContainerElement_TextBox.js'></script>
         
         <!-- This file contains ContainerElement_PictureBox which is a child of Container. ContainerElement_PictureBox handles all the drawing of images -->
-        <script type='text/javascript' src='JS/Canvas/ContainerElement_PictureBox.js'></script>
+        <script type='text/javascript' src='JS/Canvas/Engine/ContainerElement_PictureBox.js'></script>
         
         <!-- This class contains any preloaded Container elements that need to be loaded ASAP. For example, a "loading..." textbox  -->
-        <script type='text/javascript' src='JS/Canvas/Preloaded.js'></script>
+        <script type='text/javascript' src='JS/Canvas/Engine/Preloaded.js'></script>
         
         <!-- This file contains the engine which brings all the above together and makes it all work. -->
-        <script type='text/javascript' src='JS/Canvas/Engine.js'></script>
+        <script type='text/javascript' src='JS/Canvas/Engine/Core.js'></script>
+        <script type='text/javascript' src='JS/Canvas/MainLoop.js'></script>
 
     </body>
 </html>
