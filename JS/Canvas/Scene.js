@@ -76,7 +76,9 @@ SceneController.prototype.drawImageRound = function (X, Y, Width, Height, ImageU
      * First we need to find out if we have already loaded this image on this page before
      * we Base64 the URL of the image to create a uniform naming system with basic characters
      */
-    if (this.isImageLoaded(ImageURL)) {
+    var loadedImage = this.isImageLoaded(ImageURL);
+    
+    if (loadedImage) {
         if (this.Data.WebGL.On) {
 
         } else {
@@ -92,7 +94,7 @@ SceneController.prototype.drawImageRound = function (X, Y, Width, Height, ImageU
             this.context.clip();
 
 
-            this.context.drawImage(this.LoadedImages[ImageName], X, Y, Size, Size);
+            this.context.drawImage(loadedImage, X, Y, Size, Size);
 
             this.context.beginPath();
             this.context.arc(X, Y, Size / 2, 0, Math.PI * 2, true);
@@ -110,12 +112,15 @@ SceneController.prototype.drawImage = function (X, Y, Width, Height, ImageURL, O
      * First we need to find out if we have already loaded this image on this page before
      * we Base64 the URL of the image to create a uniform naming system with basic characters
      */
-    if (this.isImageLoaded(ImageURL)) {
+    
+    var loadedImage = this.isImageLoaded(ImageURL);
+    
+    if (loadedImage) {
         if (this.Data.WebGL.On) {
 
         } else {
             this.context.globalAlpha = Opacity;
-            this.context.drawImage(this.LoadedImages[ImageName], X, Y, Width, Height);
+            this.context.drawImage(loadedImage, X, Y, Width, Height);
             this.context.globalAlpha = 1;
         }
     }
@@ -132,7 +137,7 @@ SceneController.prototype.isImageLoaded = function (ImageURL) {
         this.LoadedImages[ImageName] = new Image();
         this.LoadedImages[ImageName].src = ImageURL;
     } else if (this.LoadedImages[ImageName].complete) {
-        return true;
+        return this.LoadedImages[ImageName];
     }
     return false;
 }
