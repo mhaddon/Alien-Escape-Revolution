@@ -20,7 +20,8 @@ var EntityElement = function (name, settings) {
             Y: 0,
             Z: 0,
             old_X: 0,
-            old_Y: 0
+            old_Y: 0,
+            Parent: null
         },
         Model: {
             Name: "",
@@ -140,6 +141,7 @@ var EntityElement = function (name, settings) {
             drawModel: this.drawModel,
             doesCollideWith: this.doesCollideWith,
             handleCollision: this.handleCollision,
+            checkCollisions: this.checkCollisions,
             kill: this.kill,
             handleBehaviours: this.handleBehaviours,
             _onAnimationEnd: this._onAnimationEnd,
@@ -412,6 +414,25 @@ EntityElement.prototype._onAnimationEnd = function () {
             var fn = window[e.Function];
             if (typeof fn === "function") {
                 fn.apply(this, [e.Parameters]);
+            }
+        }
+    }
+}
+
+EntityElement.prototype.checkCollisions = function (dt) {
+    for (var i = 0; i < Entity.Elements.length; i++) {
+        var e = Entity.Elements[i];
+        if ((e !== this) &&
+                (typeof e !== "undefined") &&
+                (e.Data.AI.Group !== this.Data.AI.Group) &&
+                (e.Data.AI.State === AI_State.Alive) &&
+                (this.Data.AI.State === AI_State.Alive) &&
+                (e.Data.Physics.Collision) &&
+                (this.Data.Physics.Collision)) {
+
+            if (this.doesCollideWith(e)) {
+                this.handleCollision(e);
+                return;
             }
         }
     }

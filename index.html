@@ -38,9 +38,10 @@
         <script type='text/javascript' src='JS/Canvas/Behaviours/SpaceShipShoot.js'></script>
         <script type='text/javascript' src='JS/Canvas/Behaviours/PlayerGravityPull.js'></script>
         
-        <script type='text/javascript' src='JS/Canvas/Events/KillSelf.js'></script>
-        <script type='text/javascript' src='JS/Canvas/Events/Explode.js'></script>
-        <script type='text/javascript' src='JS/Canvas/Events/GainScore.js'></script>
+        <script type='text/javascript' src='JS/Canvas/Events/Entity/KillSelf.js'></script>
+        <script type='text/javascript' src='JS/Canvas/Events/Entity/Explode.js'></script>
+        <script type='text/javascript' src='JS/Canvas/Events/Entity/GainScore.js'></script>
+        <script type='text/javascript' src='JS/Canvas/Events/Container/Events.js'></script>
         
         
         
@@ -66,10 +67,11 @@
         <!-- This file controls the keyboard events and records information like what keys are currently being pressed -->
         <script type='text/javascript' src='JS/Canvas/Engine/Key.js'></script>
         
+        <script type='text/javascript' src='JS/Canvas/ModuleController.js'></script>
         <script type='text/javascript' src='JS/Canvas/Engine/AudioElement.js'></script>
         <script type='text/javascript' src='JS/Canvas/Engine/Audio.js'></script>
-        <script type='text/javascript' src='JS/Canvas/Engine/Modules/DashElement.js'></script>
-        <script type='text/javascript' src='JS/Canvas/Engine/Modules/Dash.js'></script>
+        <script type='text/javascript' src='JS/Canvas/Modules/DashElement.js'></script>
+        <script type='text/javascript' src='JS/Canvas/Modules/Dash.js'></script>
         <script type='text/javascript' src='JS/Canvas/Engine/ModelElement.js'></script>
         <script type='text/javascript' src='JS/Canvas/Engine/Model.js'></script>
         <script type='text/javascript' src='JS/Canvas/Engine/EntityElement.js'></script>
@@ -89,8 +91,9 @@
         <script type='text/javascript' src='JS/Canvas/Preloaded.js'></script>
         
         <!-- This file contains the engine which brings all the above together and makes it all work. -->
-        <script type='text/javascript' src='JS/Canvas/Engine/Core.js'></script>
         <script type='text/javascript' src='JS/Canvas/MainLoop.js'></script>
+        <script type='text/javascript' src='JS/Canvas/GameLoad.js'></script>
+        <script type='text/javascript' src='JS/Canvas/Engine/Core.js'></script>
 
     </body>
 </html>

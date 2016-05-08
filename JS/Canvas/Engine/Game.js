@@ -31,7 +31,7 @@ GameController.prototype.addScoreModifier = function (Amount) {
 }
 
 GameController.prototype.addAge = function (dt) {
-    this.Data.Age += dt;
+    this.Data.Age += parseInt(dt, 10);
 }
 
 GameController.prototype.resetScore = function () {

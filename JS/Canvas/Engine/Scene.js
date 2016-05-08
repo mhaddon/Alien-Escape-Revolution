@@ -216,6 +216,7 @@ SceneController.prototype.drawRect = function (X, Y, Width, Height, FillInfo, Ou
         if (Outline.Colour !== null) {
             this.context.globalAlpha = Outline.Opacity;
             this.context.strokeStyle = Outline.Colour;
+            this.context.lineWidth = 1;
             this.context.stroke();
             this.context.globalAlpha = 1;
         }
