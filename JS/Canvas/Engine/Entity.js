@@ -23,8 +23,10 @@ EntityController.prototype = Object.create(Controller.prototype);
 EntityController.prototype.constructor = Controller;
 
 EntityController.prototype.renderAll = function (dt) {
-    for (var i = 0; i < this.Elements.length; i++) {
-        var e = this.Elements[i];
+    
+    this.Elements.forEach(function (e) {
+    //for (var i = 0; i < this.Elements.length; i++) {
+    //    var e = this.Elements[i];
 
         var Parent = Container.find(e.Data.Position.Parent);
         if (Parent) {
@@ -37,7 +39,8 @@ EntityController.prototype.renderAll = function (dt) {
                 e.draw(dt);
             }
         }
-    }
+    //}
+    });
 
     /*
      this.checkCollisions(dt);

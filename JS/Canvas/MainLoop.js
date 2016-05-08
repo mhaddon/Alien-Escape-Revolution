@@ -1,11 +1,12 @@
 /**
  * This function is the part of the code where i deal with the player in particular
- * 
+ *
  * @param {Number} dt
  * @returns {undefined}
  */
 function mainLoop(dt) {
-    if (Container.find('containerGame').getCoords().Visible) {
+    var GameContainer = Container.find('containerGame');
+    if ((GameContainer) && (GameContainer.getCoords().Visible)) {
         Game.addAge(dt);
 
         /**
@@ -27,15 +28,6 @@ function mainLoop(dt) {
             var Player = Entity.find('Player');
             Player.Data.Physics.Velocity.Y -= Player.Data.Physics.Thrust * dt;
         }
-        if (Key.isKeyPressed(KeyCode.F, false)) {
-            Scene.drawText(25, 25, "FPS: " + Scene.getFPS(),
-                    ({
-                        Opacity: 1,
-                        Align: "left",
-                        Colour: "white",
-                        Font: "16px Georgia"
-                    }));
-        }
 
 
         /**
@@ -45,5 +37,16 @@ function mainLoop(dt) {
         Scene.canvas.style.backgroundRepeat = 'no-repeat'; //this has to be redefined constantly because everyone loves css
 
         Container.find('textScore').Data.Text.Value = Math.floor(Game.getScore());
+    }
+
+
+    if (Key.isKeyPressed(KeyCode.F, false)) {
+        Scene.drawText(25, 25, "FPS: " + Scene.getFPS(),
+                ({
+                    Opacity: 1,
+                    Align: "left",
+                    Colour: "white",
+                    Font: "16px Georgia"
+                }));
     }
 }

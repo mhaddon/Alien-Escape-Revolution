@@ -1,6 +1,7 @@
 var ModuleController = function () {
     this.Events = {
-        onLoop: []
+        onLoop: [],
+        GameReset: []
     };
 
 
@@ -25,9 +26,6 @@ ModuleController.prototype.trigger = function (EventType, Parameters) {
     }
 }
 
-
-
-
 var Module = new ModuleController;
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -38,6 +36,10 @@ document.addEventListener('DOMContentLoaded', function () {
     Module.Events.onLoop.push({
         Context: window,
         Function: mainLoop
+    });
+    Module.Events.GameReset.push({
+        Context: Dash,
+        Function: Dash.killAll
     });
 });
 

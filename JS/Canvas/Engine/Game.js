@@ -63,9 +63,8 @@ GameController.prototype.reset = function () {
     });
 
     Entity.killNonProtected();
-
-    Dash.killAll();
-
+    
+    Module.trigger('GameReset', null);
 }
 
 var Game = new GameController();

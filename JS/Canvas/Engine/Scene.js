@@ -103,8 +103,8 @@ SceneController.prototype.drawImageRound = function (X, Y, Width, Height, ImageU
             this.context.fill();
             this.context.closePath();
             this.context.clip();
-
-
+            
+            this.context.globalCompositeOperation = 'lighten';
             this.context.drawImage(loadedImage, X, Y, Size, Size);
 
             this.context.beginPath();
@@ -114,6 +114,7 @@ SceneController.prototype.drawImageRound = function (X, Y, Width, Height, ImageU
 
 
             this.context.restore();
+            this.context.globalAlpha = 1;
         }
     }
 }
@@ -253,6 +254,7 @@ SceneController.prototype.drawText = function (X, Y, Text, FontInfo) {
         this.context.textAlign = Font.Align;
         this.context.fillStyle = Font.Colour;
         this.context.fillText(Text, X, Y);
+        this.context.globalAlpha = 1;
     }
 }
 
